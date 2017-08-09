@@ -1,6 +1,8 @@
 html, body {
     background: #c0c0c0;
     font-family: Trebuchet, Arial, sans-serif;
+    padding: 0 5px;
+    padding-bottom: 35px;
 }
 
 .color-wrapper {
@@ -15,16 +17,26 @@ html, body {
     font-weight: 700;
 }
 
-#content {
+.content {
+    width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 
-.flex-50 {
+.flex {
     flex-basis: auto;
+}
+
+#selected {
+    padding: 38px;
+    flex-basis: 95%;
+    max-width: 750px;
+    border: 2px solid black;
+    background: #ffc107;
+    margin-bottom: 55px;
 }
 
 button {
