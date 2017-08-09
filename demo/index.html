@@ -1,7 +1,13 @@
+<!DOCTYPE html>
 <html>
 <head>
   <title>material-design-inspired-color-picker demo</title>
   <style>
+    html, body {
+      background: #c0c0c0;
+      font-family: Trebuchet, Arial, sans-serif;
+    }
+
     .color-wrapper {
       margin: 0 auto;
     }
@@ -25,9 +31,70 @@
       margin-left: 3%;
       margin-right: 3%;
     }
+
+    button {
+      position: relative;
+
+      margin: 3px;
+      padding: 0;
+
+      overflow: hidden;
+
+      border-width: 0;
+      outline: none;
+      border-radius: 2px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+
+      background-color: #cc7e00;
+      color: #ecf0f1;
+
+      transition: background-color .3s;
+    }
+
+    button:hover, button:focus {
+      background-color: #b76100;
+    }
+
+    button > * {
+      position: relative;
+    }
+
+    button span {
+      display: block;
+      padding: 8px 18px;
+    }
+
+    button:before {
+      content: "";
+
+      position: absolute;
+      top: 50%;
+      left: 50%;
+
+      display: block;
+      width: 0;
+      padding-top: 0;
+
+      border-radius: 100%;
+
+      background-color: rgba(236, 240, 241, .3);
+
+      -webkit-transform: translate(-50%, -50%);
+      -moz-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      -o-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+
+    button:active:before {
+      width: 120%;
+      padding-top: 120%;
+
+      transition: width .2s ease-out, padding-top .2s ease-out;
+    }
   </style>
 </head>
-<body style="background: #e2e2e2">
+<body>
 
 <div style="width: 90%; font-size: 26px; text-decoration: underline; margin-top: 45px; margin-bottom: 55px"
      class="center bold">
@@ -43,14 +110,25 @@
       <span class="bold" id="selectedColor">#ffc107</span>
     </div>
 
-    <md-color-picker value="#ffc107" palette="material-full"></md-color-picker>
+    <md-color-picker value="#ffc107" palette="material-full" use-spectrum-picker="true"
+                     default-tint="500"></md-color-picker>
   </div>
 
   <div class="flex-50">
     <h3>Select a palette</h3>
-    <button onclick="selectPalette('material')">material</button>
-    <button onclick="selectPalette('material-full')">material-full</button>
-    <button onclick="selectPalette('material-accent')">material-accent</button>
+    <button onclick="selectPalette('material')"><span>material</span></button>
+    <button class="orange" onclick="selectPalette('material-full')"><span>material-full</span></button>
+    <button onclick="selectPalette('material-accent')"><span>material-accent</span></button>
+
+    <h3>Spectrum picker: <span id="spectrum">activated</span></h3>
+    <button onclick="toggleSpectrumPicker()" ><span>Toggle spectrum picker</span></button>
+
+    <h3>Default Tint: <span id="tint">500</span></h3>
+      <button onclick="setTint(100)"><span>set tint to 100</span></button>
+      <button onclick="setTint(300)"><span>set tint to 300</span></button>
+      <button class="orange" onclick="setTint(500)"><span>set tint to 500</span></button>
+      <button onclick="setTint(700)"><span>set tint to 700</span></button>
+      <button onclick="setTint(900)"><span>set tint to 900</span></button>
   </div>
 </div>
 
@@ -58,9 +136,10 @@
 <script src="../dist/md-color-picker.js"></script>
 <script>
   var picker = document.getElementsByTagName('md-color-picker')[0]
-
+  var spectrum = document.getElementById('spectrum')
   var selectedColorDiv = document.getElementById('selected')
   var selectedColorSpan = document.getElementById('selectedColor')
+
   picker.addEventListener('change', function (event) {
     var color = event.detail[0]
     console.log('Selected Color:', color)
@@ -79,8 +158,17 @@
     selectedColorSpan.innerHTML = color
   })
 
-  function selectPalette (str) {
+  function selectPalette(str) {
     picker.palette = str
+  }
+
+  function toggleSpectrumPicker() {
+    picker.useSpectrumPicker = !picker.useSpectrumPicker
+    spectrum.innerHTML = picker.useSpectrumPicker ? 'activated' : 'disabled'
+  }
+
+  function setTint(tint) {
+    picker.defaultTint = tint
   }
 
 </script>

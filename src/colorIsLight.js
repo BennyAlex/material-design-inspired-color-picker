@@ -1,5 +1,4 @@
-/* eslint no-bitwise: 0 */
-const toRgb = (color) => {
+function toRgb(color) {
   if (color[0] === '#') {
     color = color.substr(1)
   }
@@ -12,7 +11,7 @@ const toRgb = (color) => {
   return {r: r, g: g, b: b}
 }
 
-export default function colorIsLight (color, differenceRange) {
-  let rgb = toRgb(color) // https://www.w3.org/TR/AERT#color-contrast
+export default function (color, differenceRange) {
+  const rgb = toRgb(color) // https://www.w3.org/TR/AERT#color-contrast
   return ((rgb.r * 320 + rgb.g * 590 + rgb.b * 110) / 1000) > (differenceRange || 125) // suggested by w3
 }

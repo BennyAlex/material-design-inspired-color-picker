@@ -10,6 +10,7 @@
 * can be used in plain javascript projects or with other js frameworks
 
 ## Todo
+* add babel, but at the moment it looks like there is an error with rollup-babel plugin  :/
 * margin attribute
 * number of colors per row attribute
 * color-size attribute
@@ -42,10 +43,10 @@ Following properties can be parsed into the picker:
 | :---: | :---:| :---:| :---: |
 | value | string | none | #f1c5a9 |
 | palette | string or object | 'material' | 'material-full' |
-| defaultTint | number or string | 500 | '200' |
-| useSpectrumPicker | bool | true | false |
+| defaultTint in js or default-tint in HTML! | number or string | 500 | '200' |
+| useSpectrumPicker in js or use-spectrum-picker in HTML!| bool | true | false |
 
-**explanation:**
+**Explanation:**
 * value : the color which is selected. Must be a hex number with 6 digits and a hashtag.
 * palette : the palette with all colors. If it is a string, the picker will use a built in palette. Currently the following palettes are available:
 ````
@@ -56,7 +57,7 @@ material-accent : only the accent material colors
 * defaultTint : this is the tint for each color wich will be shown at the beginning. Material colors default tint is 500. For custom palettes you can also use strings.
 * useSpectrumPicker : if false, the other color tints can not be selected, so only the color wich matches default tint is selectable.
 
-**Full example**
+**Full example:**
 ````html
 <md-color-picker value="#abcdef" palette="material-accent" defaultTint="300" useSpectrumPicker="false"></md-color-picker>
 ````
