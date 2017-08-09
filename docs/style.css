@@ -1,0 +1,89 @@
+html, body {
+    background: #c0c0c0;
+    font-family: Trebuchet, Arial, sans-serif;
+}
+
+.color-wrapper {
+    margin: 0 auto;
+}
+
+.center {
+    text-align: center;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+#content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-50 {
+    flex-basis: auto;
+}
+
+button {
+    position: relative;
+
+    margin: 3px;
+    padding: 0;
+
+    overflow: hidden;
+
+    border-width: 0;
+    outline: none;
+    border-radius: 2px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+
+    background-color: #cc7e00;
+    color: #ecf0f1;
+
+    transition: background-color .4s;
+}
+
+button:hover, button:focus {
+    background-color: #b76100;
+}
+
+button > * {
+    position: relative;
+}
+
+button span {
+    display: block;
+    padding: 8px 18px;
+}
+
+button:before {
+    content: "";
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+    width: 0;
+    padding-top: 0;
+
+    border-radius: 100%;
+
+    background-color: rgba(236, 240, 241, .3);
+
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+button:active:before {
+    width: 120%;
+    padding-top: 120%;
+
+    transition: width .4s ease-out, padding-top .4s ease-out;
+}

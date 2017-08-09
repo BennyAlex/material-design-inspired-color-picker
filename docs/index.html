@@ -2,107 +2,18 @@
 <html>
 <head>
   <title>material-design-inspired-color-picker demo</title>
-  <style>
-    html, body {
-      background: #c0c0c0;
-      font-family: Trebuchet, Arial, sans-serif;
-    }
-
-    .color-wrapper {
-      margin: 0 auto;
-    }
-
-    .center {
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .bold {
-      font-weight: bold;
-    }
-
-    #content {
-      width: 97%;
-      display: flex;
-    }
-
-    .flex-50 {
-      flex: 44%;
-      margin-left: 3%;
-      margin-right: 3%;
-    }
-
-    button {
-      position: relative;
-
-      margin: 3px;
-      padding: 0;
-
-      overflow: hidden;
-
-      border-width: 0;
-      outline: none;
-      border-radius: 2px;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
-
-      background-color: #cc7e00;
-      color: #ecf0f1;
-
-      transition: background-color .3s;
-    }
-
-    button:hover, button:focus {
-      background-color: #b76100;
-    }
-
-    button > * {
-      position: relative;
-    }
-
-    button span {
-      display: block;
-      padding: 8px 18px;
-    }
-
-    button:before {
-      content: "";
-
-      position: absolute;
-      top: 50%;
-      left: 50%;
-
-      display: block;
-      width: 0;
-      padding-top: 0;
-
-      border-radius: 100%;
-
-      background-color: rgba(236, 240, 241, .3);
-
-      -webkit-transform: translate(-50%, -50%);
-      -moz-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-      -o-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
-    }
-
-    button:active:before {
-      width: 120%;
-      padding-top: 120%;
-
-      transition: width .2s ease-out, padding-top .2s ease-out;
-    }
-  </style>
+  <link href="style.css" rel="stylesheet">
 </head>
+
 <body>
 
-<div style="width: 90%; font-size: 26px; text-decoration: underline; margin-top: 45px; margin-bottom: 55px"
+<div style="width: 90%; font-size: 26px; text-decoration: underline; padding-top: 42px; margin: 0 auto; margin-bottom: 57px;"
      class="center bold">
   This is the demo page for material-design-inspired-color-picker
 </div>
 
 <div id="content">
-  <div class="flex-50">
+  <div class="flex" style="align-self: flex-end">
     <div
       style="padding: 40px; max-width: 390px; min-width: 230px; border: 2px solid black; background: #ffc107; margin-bottom: 45px;"
       id="selected" class="center">
@@ -113,22 +24,24 @@
     <md-color-picker value="#ffc107" palette="material-full" use-spectrum-picker="true"
                      default-tint="500"></md-color-picker>
   </div>
-s
-  <div class="flex-50">
-    <h3>Select a palette</h3>
-    <button onclick="selectPalette('material')"><span>material</span></button>
-    <button class="orange" onclick="selectPalette('material-full')"><span>material-full</span></button>
-    <button onclick="selectPalette('material-accent')"><span>material-accent</span></button>
 
-    <h3>Spectrum picker: <span id="spectrum">activated</span></h3>
-    <button onclick="toggleSpectrumPicker()" ><span>Toggle spectrum picker</span></button>
+  <div style="flex-basis: 5%"></div>
 
-    <h3>Default Tint: <span id="tint">500</span></h3>
-      <button onclick="setTint(100)"><span>set tint to 100</span></button>
-      <button onclick="setTint(300)"><span>set tint to 300</span></button>
-      <button class="orange" onclick="setTint(500)"><span>set tint to 500</span></button>
-      <button onclick="setTint(700)"><span>set tint to 700</span></button>
-      <button onclick="setTint(900)"><span>set tint to 900</span></button>
+  <div style="padding-bottom: 115px; align-self: flex-start" class="flex-50 center">
+    <h3>Selected palette: <span class="bold" id="palette">material-full</span></h3>
+    <button onclick="selectPalette('material')"><span>select material palette</span></button>
+    <button onclick="selectPalette('material-full')"><span>select material-full palette</span></button>
+    <button onclick="selectPalette('material-accent')"><span>select material-accent palette</span></button>
+
+    <h3>Spectrum picker: <span id="spectrum" class="bold">activated</span></h3>
+    <button onclick="toggleSpectrumPicker()"><span>Toggle spectrum picker</span></button>
+
+    <h3>Default Tint: <span id="tint" class="bold">500</span></h3>
+    <button onclick="setTint(100)"><span>set Tint to 100</span></button>
+    <button onclick="setTint(300)"><span>set Tint to 300</span></button>
+    <button onclick="setTint(500)"><span>set Tint to 500</span></button>
+    <button onclick="setTint(700)"><span>set Tint to 700</span></button>
+    <button onclick="setTint(900)"><span>set Tint to 900</span></button>
   </div>
 </div>
 
@@ -136,7 +49,9 @@ s
 <script src="../dist/md-color-picker.js"></script>
 <script>
   var picker = document.getElementsByTagName('md-color-picker')[0]
+  var palette = document.getElementById('palette')
   var spectrum = document.getElementById('spectrum')
+  var selectedTint = document.getElementById('tint')
   var selectedColorDiv = document.getElementById('selected')
   var selectedColorSpan = document.getElementById('selectedColor')
 
@@ -160,6 +75,7 @@ s
 
   function selectPalette(str) {
     picker.palette = str
+    palette.innerHTML = str
   }
 
   function toggleSpectrumPicker() {
@@ -169,10 +85,10 @@ s
 
   function setTint(tint) {
     picker.defaultTint = tint
+    selectedTint.innerHTML = tint
   }
 
 </script>
-
 </body>
 </html>
 

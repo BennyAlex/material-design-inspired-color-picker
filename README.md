@@ -1,6 +1,8 @@
 # material-design-inspired-color-picker
 > A javascript color picker inspired by material design
 
+### [DEMO](https://bennyalex.github.io/material-design-inspired-color-picker/ "DEMO")
+
 ## Features
 * built-in material color palette with shades and accent colors
 * support for custom color palettes
@@ -62,4 +64,4 @@ material-accent : only the accent material colors
 <md-color-picker value="#abcdef" palette="material-accent" defaultTint="300" useSpectrumPicker="false"></md-color-picker>
 ````
 
-For a more detailed example, see the demo page under demo folder
+For a more detailed example, see the demo page under docs folder or live: https://bennyalex.github.io/material-design-inspired-color-picker/
