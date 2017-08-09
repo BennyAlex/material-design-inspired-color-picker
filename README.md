@@ -28,7 +28,7 @@ import 'material-design-inspired-color-picker'
 ````
 2. Compatible with plain javascript
 ````html
-<script src="md-color-picker.js"></script>
+<script src="path/to/md-color-picker.js"></script>
 ````
 Then, you can use it like a custom-element tag:
 ````html
