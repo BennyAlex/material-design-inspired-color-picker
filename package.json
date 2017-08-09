@@ -1,13 +1,14 @@
 {
   "name": "material-design-inspired-color-picker",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A color picker inspired by material design. Supports custom colors and palettes.",
-  "main": "index.js",
+  "main": "dist/md-color-picker.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "npm run build",
-    "build": "rimraf dist && cross-env NODE_ENV=production rollup -c",
-    "dev": "rollup -c -w"
+    "build": "rimraf dist/md-color-picker.js && cross-env NODE_ENV=production rollup -c",
+    "dev": "rimraf dist/md-color-picker-dev.js && rollup -c -w",
+    "publish": "npm run build && npm publish"
   },
   "author": "Benjamin Franz",
   "license": "GPL-3.0",
@@ -16,9 +17,12 @@
     "url": "https://github.com/BennyAlex/material-design-inspired-color-picker.git"
   },
   "devDependencies": {
-    "cross-env": "^5.0.4",
+    "babel-core": "^6.25.0",
+    "babel-plugin-transform-export-extensions": "^6.22.0",
+    "cross-env": "^5.0.5",
     "rimraf": "^2.6.1",
     "rollup": "^0.45.2",
+    "rollup-plugin-babel": "^3.0.1",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-replace": "^1.1.1",
     "rollup-plugin-uglify": "^2.0.1",
