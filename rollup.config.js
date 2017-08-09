@@ -10,14 +10,14 @@ if (!production) console.log('Running in development mode.')
 
 export default {
   entry: 'src/main.js',
-  dest: production ? 'dist/md-color-picker.js' : 'dist/md-color-picker-dev.js',
+  dest: 'dist/md-color-picker.js',
   format: 'es',
   plugins: [
     replace({
       'process.env.NODE_ENV': production ? JSON.stringify('production') : JSON.stringify('develop')
     }),
     /*babel({
-      exclude: ['node_modules/**', 'demo/**', 'rollup.config.js', 'src/main.js', 'src/components/**']
+      exclude: ['node_modules/**', 'docs/**', 'rollup.config.js', 'src/main.js', 'src/components/**']
     }),*/
     nodeResolve({
       module: true,
