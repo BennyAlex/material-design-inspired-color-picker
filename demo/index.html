@@ -1,0 +1,90 @@
+<html>
+<head>
+  <title>material-design-inspired-color-picker demo</title>
+  <style>
+    .color-wrapper {
+      margin: 0 auto;
+    }
+
+    .center {
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .bold {
+      font-weight: bold;
+    }
+
+    #content {
+      width: 97%;
+      display: flex;
+    }
+
+    .flex-50 {
+      flex: 44%;
+      margin-left: 3%;
+      margin-right: 3%;
+    }
+  </style>
+</head>
+<body style="background: #e2e2e2">
+
+<div style="width: 90%; font-size: 26px; text-decoration: underline; margin-top: 45px; margin-bottom: 55px"
+     class="center bold">
+  This is the demo page for material-design-inspired-color-picker
+</div>
+
+<div id="content">
+  <div class="flex-50">
+    <div
+      style="padding: 40px; max-width: 390px; min-width: 230px; border: 2px solid black; background: #ffc107; margin-bottom: 45px;"
+      id="selected" class="center">
+      selected color:
+      <span class="bold" id="selectedColor">#ffc107</span>
+    </div>
+
+    <md-color-picker value="#ffc107" palette="material-full"></md-color-picker>
+  </div>
+
+  <div class="flex-50">
+    <h3>Select a palette</h3>
+    <button onclick="selectPalette('material')">material</button>
+    <button onclick="selectPalette('material-full')">material-full</button>
+    <button onclick="selectPalette('material-accent')">material-accent</button>
+  </div>
+</div>
+
+
+<script src="../dist/md-color-picker.js"></script>
+<script>
+  var picker = document.getElementsByTagName('md-color-picker')[0]
+
+  var selectedColorDiv = document.getElementById('selected')
+  var selectedColorSpan = document.getElementById('selectedColor')
+  picker.addEventListener('change', function (event) {
+    var color = event.detail[0]
+    console.log('Selected Color:', color)
+    picker.value = color
+    if (colorIsLight(color, 180)) {
+      selectedColorDiv.style.borderColor = 'black'
+      selectedColorSpan.style.color = 'black'
+      selectedColorDiv.style.color = 'black'
+    }
+    else {
+      selectedColorDiv.style.borderColor = 'white'
+      selectedColorSpan.style.color = 'white'
+      selectedColorDiv.style.color = 'white'
+    }
+    selectedColorDiv.style.background = color
+    selectedColorSpan.innerHTML = color
+  })
+
+  function selectPalette (str) {
+    picker.palette = str
+  }
+
+</script>
+
+</body>
+</html>
+
