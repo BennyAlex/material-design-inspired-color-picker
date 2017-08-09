@@ -12,7 +12,7 @@
 * can be used in plain javascript projects or with other js frameworks
 
 ## Todo
-* add babel, but at the moment it looks like there is an error with rollup-babel plugin  :/
+* add babel, but at the moment it looks like there is an error with rollup-babel plugin  :(
 * margin attribute
 * number of colors per row attribute
 * color-size attribute
