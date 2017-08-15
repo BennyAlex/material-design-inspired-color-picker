@@ -2,7 +2,7 @@ function toRgb(color) {
   if (color[0] === '#') {
     color = color.substr(1)
   }
-  if (color.length !== 6) return console.warn('color must have a length of 6 hex numbers')
+  if (color.length !== 6) return console.error('color must have a length of 6 hex numbers')
   let r, g, b
   let rgb = parseInt(color, 16)   // convert rrggbb to decimal
   r = (rgb >> 16) & 0xff  // extract red
