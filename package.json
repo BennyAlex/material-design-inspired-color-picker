@@ -1,12 +1,12 @@
 {
   "name": "material-design-inspired-color-picker",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "A color picker inspired by material design. Supports custom colors and palettes.",
   "main": "dist/md-color-picker.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rimraf dist/md-color-picker.js && rimraf /docs/md-color-picker.js && cross-env NODE_ENV=production rollup -c",
-    "dev": "cross-env NODE_ENV=develop rollup -c -w"
+    "build": "rimraf dist/md-color-picker.js && rimraf docs/md-color-picker.js && cross-env NODE_ENV=production rollup -c",
+    "dev": "rimraf docs/md-color-picker.js && cross-env NODE_ENV=develop rollup -c -w"
   },
   "author": "Benjamin Franz",
   "license": "GPL-3.0",
