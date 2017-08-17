@@ -3,22 +3,23 @@ import accentMaterialPalette from './material-palette-accent'
 
 const fullMaterialPalette = {}
 
-function getPalette () {
-  for (let [key, objOrStr] of Object.entries(materialPalette)) {
+function getPalette() {
+  Object.keys(materialPalette).forEach(key => {
     let fullColor = {}
-    if (typeof objOrStr === 'string') fullColor = objOrStr
+    let valueOrObj = materialPalette[key]
+    if (typeof valueOrObj === 'string') fullColor = valueOrObj
     else {
-      for (let attr in objOrStr) {
-        if (objOrStr.hasOwnProperty(attr)) fullColor[attr] = objOrStr[attr]
-      }
+      Object.keys(materialPalette[key]).forEach(key2 => {
+        fullColor[key2] = materialPalette[key][key2]
+      })
       if (accentMaterialPalette[key]) {
-        for (let [accentKey, color] of Object.entries(accentMaterialPalette[key])) {
-          fullColor[accentKey] = color
-        }
+        Object.keys(accentMaterialPalette[key]).forEach(key3 => {
+          fullColor[key3] = accentMaterialPalette[key][key3]
+        })
       }
     }
     fullMaterialPalette[key] = fullColor
-  }
+  })
 }
 
 getPalette()

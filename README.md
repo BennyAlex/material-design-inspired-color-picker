@@ -61,7 +61,7 @@ material-accent : only the accent material colors
 
 **Full example:**
 ````html
-<md-color-picker value="#abcdef" palette="material-accent" defaultTint="300" useSpectrumPicker="false"></md-color-picker>
+<md-color-picker value="#abcdef" palette="material-accent" default-tint="300" use-spectrum-picker="false"></md-color-picker>
 ````
 
 For a more detailed example, see the demo page under docs folder or live: https://bennyalex.github.io/material-design-inspired-color-picker/

@@ -6,68 +6,54 @@ import {minify} from 'uglify-es'
 import babel from 'rollup-plugin-babel';
 
 const production = process.env.NODE_ENV === 'production'
-if (!production) console.log('Running in development mode.')
 
-export default [
-  {
-    entry: 'src/main.js',
-    dest: 'dist/md-color-picker.js',
-    format: 'es',
-    plugins: [
-      replace({
-        'process.env.NODE_ENV': production ? JSON.stringify('production') : JSON.stringify('develop')
-      }),
-      babel({
-        exclude: [
-          "node_modules/**",
-          "src/components/**",
-          "components/**",
-          "**.vue",
-          "src/components/",
-          "color-picker.vue",
-          "src/components/**",
-          "main.js",
-          "src/main.js"
-        ],
-        "plugins": [
-          "external-helpers"
-        ],
-      }),
-      nodeResolve({
-        module: true,
-        jsnext: true,
-        main: true
-      }),
-      vue({
-        compileTemplate: true,
-        css: true
-      }),
-      uglify({}, minify)
-    ]
-  },
-  {
+
+const productionPlugins = [
+  replace({
+    'process.env.NODE_ENV': JSON.stringify('production')
+  }),
+  nodeResolve({
+    module: true,
+    jsnext: true,
+    main: true
+  }),
+  vue({
+    compileTemplate: true,
+    css: true
+  }),
+  babel({
+    exclude: ['node_modules/**', '*.vue', '**.vue'],
+  })
+]
+
+let rollups = []
+
+if (production) {
+  rollups = [
+    {
+      entry: 'src/main.js',
+      dest: 'dist/md-color-picker.js',
+      format: 'es',
+      plugins: productionPlugins
+    },
+    {
+      entry: 'src/main.js',
+      dest: 'docs/md-color-picker.js',
+      format: 'es',
+      plugins: productionPlugins
+    }
+  ]
+}
+else {
+  console.log('Running in development mode.')
+  // develop build
+  rollups = {
     entry: 'src/main.js',
     dest: 'docs/md-color-picker.js',
     format: 'es',
     plugins: [
       replace({
-        'process.env.NODE_ENV': production ? JSON.stringify('production') : JSON.stringify('develop')
-      }),
-      babel({
-        exclude: [
-          "node_modules/**",
-          "src/components/**",
-          "components/**",
-          "**.vue",
-          "src/components/",
-          "color-picker.vue",
-          "src/components/**",
-          "main.js",
-          "src/main.js"
-        ],
-        "plugins": [
-          "external-helpers"
-        ],
+        'process.env.NODE_ENV': JSON.stringify('develop')
       }),
       nodeResolve({
         module: true,
@@ -77,7 +63,9 @@ export default [
       vue({
         compileTemplate: true,
         css: true
-      }),
+      })
     ]
   }
-]
+}
+
+export default rollups

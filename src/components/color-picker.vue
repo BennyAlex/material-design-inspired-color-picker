@@ -29,6 +29,24 @@
   import accentMaterialPalette from '../palettes/material-palette-accent'
   import fullMaterialPalette from '../palettes/material-palette-full'
 
+  function arrayIncludes(arr, obj) {
+    let i = arr.length;
+    while (i--) {
+      if (arr[i] === obj) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function valuesOfObj(obj) {
+    const values = []
+    Object.keys(obj).forEach(key => {
+      values.push(obj[key])
+    })
+    return values
+  }
+
   export default {
     name: 'color-picker',
     props: {
@@ -50,10 +68,10 @@
       }
     },
     methods: {
-      colorIsLight (color) {
+      colorIsLight(color) {
         return colorIsLight(color, 231)
       },
-      click (color) {
+      click(color) {
         if (this.useSpectrumPicker && typeof this.currentPalette[color.name] === 'object') {
           this.subPalette = color.name
           if (this.isTintOfSelected(color)) return
@@ -61,28 +79,30 @@
         }
         this.$emit('change', color.value)
       },
-      isTintOfSelected (color) {
-        return this.selectedColorName === color.name && Object.values(this.currentPalette[this.selectedColorName]).includes(this.value)
+      isTintOfSelected(color) {
+        return this.selectedColorName === color.name && arrayIncludes(valuesOfObj(this.currentPalette[this.selectedColorName]), this.value)
       },
-      getDefaultColor (colorObj) {
+      getDefaultColor(colorObj) {
         if (colorObj[this.defaultTint]) return colorObj[this.defaultTint]
-        else return Object.values(colorObj)[Math.round(Object.keys(colorObj).length / 2) - 1] // get the color in the middle
+        else return valuesOfObj(colorObj)[Math.round(Object.keys(colorObj).length / 2) - 1] // get the color in the middle
       }
     },
     computed: {
-      colors () {
+      colors() {
         const colors = []
         const palette = this.subPalette ? this.currentPalette[this.subPalette] : this.currentPalette
         const subName = this.subPalette ? this.subPalette + ' - ' : ''
-        for (let [key, value] of Object.entries(palette)) {
+
+        Object.keys(palette).forEach(key => {
+          let value = palette[key]
           colors.push({
             name: subName + key,
             value: typeof value === 'string' ? value : this.getDefaultColor(value)
           })
-        }
+        })
         return colors
       },
-      currentPalette () {
+      currentPalette() {
         if (!this.palette) return materialPalette
         else if (typeof this.palette === 'string') {
           const availablePalettes = {
@@ -90,32 +110,31 @@
             'material-full': fullMaterialPalette,
             'material-accent': accentMaterialPalette
           }
-          if (!Object.keys(availablePalettes).includes(this.palette)) {
-            console.error('You passed in an unknown palette string. Following palettes are available:', Object.keys(availablePalettes))
-          }
-          else return availablePalettes[this.palette]
+          console.assert(arrayIncludes(Object.keys(availablePalettes), this.palette), 'You passed in an unknown palette string. Following palettes are available:' + Object.keys(availablePalettes))
+          return availablePalettes[this.palette]
         }
         else return this.palette
       }
     },
-    data () {
+    data() {
       return {
         subPalette: undefined,
         selectedColorName: undefined,
         privateCurrentPalette: undefined
       }
     },
-    created () {
+    created() {
       if (!this.value || this.value.length !== 7 || this.selectedColorName) return // value must be in hex format, eg: #ffffff
-      for (let [name, valueOrObject] of Object.entries(this.currentPalette)) {
-        const values = typeof valueOrObject === 'string' ? [valueOrObject] : Object.values(valueOrObject)
-        for (let value of values) {
-          if (value === this.value) {
+      Object.keys(this.currentPalette).forEach(key => {
+        let valueOrObject = this.currentPalette[key]
+        const values = typeof valueOrObject === 'string' ? [valueOrObject] : valuesOfObj(valueOrObject)
+        for (let i in values) {
+          if (values[i] === this.value) {
             this.selectedColorName = name
             return
           }
         }
-      }
+      })
     }
   }
 </script>

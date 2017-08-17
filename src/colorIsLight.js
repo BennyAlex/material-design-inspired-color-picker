@@ -2,7 +2,7 @@ function toRgb(color) {
   if (color[0] === '#') {
     color = color.substr(1)
   }
-  if (color.length !== 6) return console.error('color must have a length of 6 hex numbers')
+  console.assert(color.length === 6, 'color must have a length of 6 hex numbers')
   let r, g, b
   let rgb = parseInt(color, 16)   // convert rrggbb to decimal
   r = (rgb >> 16) & 0xff  // extract red
@@ -11,7 +11,9 @@ function toRgb(color) {
   return {r: r, g: g, b: b}
 }
 
-export default function (color, differenceRange) {
+const colorIsLight = (color, differenceRange) => {
   const rgb = toRgb(color) // https://www.w3.org/TR/AERT#color-contrast
   return ((rgb.r * 320 + rgb.g * 590 + rgb.b * 110) / 1000) > (differenceRange || 125) // suggested by w3
 }
+
+export default colorIsLight

@@ -5,28 +5,28 @@
   "main": "dist/md-color-picker.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "npm run build",
-    "build": "rimraf dist/md-color-picker.js && cross-env NODE_ENV=production rollup -c",
-    "dev": "rollup -c -w"
+    "build": "rimraf dist/md-color-picker.js && rimraf /docs/md-color-picker.js && cross-env NODE_ENV=production rollup -c",
+    "dev": "cross-env NODE_ENV=develop rollup -c -w"
   },
   "author": "Benjamin Franz",
   "license": "GPL-3.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/BennyAlex/material-design-inspired-color-picker.git"
+    "url": "https://github.com/BennyAlex/material-design-inspired-color-picker.git",
+    "demo": "https://bennyalex.github.io/material-design-inspired-color-picker/"
   },
   "devDependencies": {
-    "babel-core": "^7.0.0-alpha.19",
+    "babel-core": "^6.25.0",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-es2015": "^6.24.1",
     "cross-env": "^5.0.5",
     "rimraf": "^2.6.1",
     "rollup": "^0.47.4",
-    "rollup-plugin-babel": "^3.0.1",
+    "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-replace": "^1.1.1",
     "rollup-plugin-uglify": "^2.0.1",
-    "rollup-plugin-vue": "^2.3.1",
+    "rollup-plugin-vue": "^2.4.1",
     "rollup-watch": "^4.3.1",
     "uglify-es": "^3.0.27",
     "vue": "^2.4.2",

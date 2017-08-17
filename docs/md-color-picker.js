@@ -7327,27 +7327,19 @@ function toRgb(color) {
   if (color[0] === '#') {
     color = color.substr(1);
   }
-
-  if (color.length !== 6) return console.error('color must have a length of 6 hex numbers');
-  let r, g, b;
-  let rgb = parseInt(color, 16); // convert rrggbb to decimal
-
+  console.assert(color.length === 6, 'color must have a length of 6 hex numbers');
+  var r = void 0,
+      g = void 0,
+      b = void 0;
+  var rgb = parseInt(color, 16); // convert rrggbb to decimal
   r = rgb >> 16 & 0xff; // extract red
-
   g = rgb >> 8 & 0xff; // extract green
-
   b = rgb >> 0 & 0xff; // extract blue
-
-  return {
-    r: r,
-    g: g,
-    b: b
-  };
+  return { r: r, g: g, b: b };
 }
 
-var colorIsLight = function (color, differenceRange) {
-  const rgb = toRgb(color); // https://www.w3.org/TR/AERT#color-contrast
-
+var colorIsLight = function colorIsLight(color, differenceRange) {
+  var rgb = toRgb(color); // https://www.w3.org/TR/AERT#color-contrast
   return (rgb.r * 320 + rgb.g * 590 + rgb.b * 110) / 1000 > (differenceRange || 125); // suggested by w3
 };
 
@@ -7683,55 +7675,73 @@ var accentMaterialPalette = {
   }
 };
 
-const fullMaterialPalette = {};
+var fullMaterialPalette = {};
 
 function getPalette() {
-  for (let [key, objOrStr] of Object.entries(materialPalette)) {
-    let fullColor = {};
-    if (typeof objOrStr === 'string') fullColor = objOrStr;else {
-      for (let attr in objOrStr) {
-        if (objOrStr.hasOwnProperty(attr)) fullColor[attr] = objOrStr[attr];
-      }
-
+  Object.keys(materialPalette).forEach(function (key) {
+    var fullColor = {};
+    var valueOrObj = materialPalette[key];
+    if (typeof valueOrObj === 'string') fullColor = valueOrObj;else {
+      Object.keys(materialPalette[key]).forEach(function (key2) {
+        fullColor[key2] = materialPalette[key][key2];
+      });
       if (accentMaterialPalette[key]) {
-        for (let [accentKey, color] of Object.entries(accentMaterialPalette[key])) {
-          fullColor[accentKey] = color;
-        }
+        Object.keys(accentMaterialPalette[key]).forEach(function (key3) {
+          fullColor[key3] = accentMaterialPalette[key][key3];
+        });
       }
     }
     fullMaterialPalette[key] = fullColor;
-  }
+  });
 }
 
 getPalette();
 
-(function(){ if(typeof document !== 'undefined'){ var head=document.head||document.getElementsByTagName('head')[0], style=document.createElement('style'), css=" .color-wrapper[data-v-370b8428] { width: 350px; } .color[data-v-370b8428] { display: inline-block; height: 54px; width: 54px; border-radius: 100%; margin: 8px; } .color.back-icon[data-v-370b8428] { text-align: center; float: left; } .color[data-v-370b8428]:before, .color[data-v-370b8428]:after { content: ''; position: absolute; border-radius: 100%; opacity: 0; transition: opacity 0.25s; } .color[data-v-370b8428]:before { /*width: 54px;*/ /*height: 54px;*/ width: 46px; height: 46px; border: 4px solid rgba(0, 0, 0, 0.15); } .color[data-v-370b8428]:after { /*width: 44px;*/ /*height: 44px;*/ width: 36px; height: 36px; margin: 6px; border: 3px solid white; } .color.is-light[data-v-370b8428]:after { border-color: #555555; } .color.selected[data-v-370b8428]:before, .color.selected[data-v-370b8428]:after { transition: opacity 0.45s; opacity: 1; } "; style.type='text/css'; if (style.styleSheet){ style.styleSheet.cssText = css; } else { style.appendChild(document.createTextNode(css)); } head.appendChild(style); } })();
+var _typeof$1 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+  return typeof obj;
+} : function (obj) {
+  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+};
 
+(function () {
+  if (typeof document !== 'undefined') {
+    var head = document.head || document.getElementsByTagName('head')[0],
+        style = document.createElement('style'),
+        css = " .color-wrapper[data-v-370b8428] { width: 350px; } .color[data-v-370b8428] { display: inline-block; height: 54px; width: 54px; border-radius: 100%; margin: 8px; } .color.back-icon[data-v-370b8428] { text-align: center; float: left; } .color[data-v-370b8428]:before, .color[data-v-370b8428]:after { content: ''; position: absolute; border-radius: 100%; opacity: 0; transition: opacity 0.25s; } .color[data-v-370b8428]:before { /*width: 54px;*/ /*height: 54px;*/ width: 46px; height: 46px; border: 4px solid rgba(0, 0, 0, 0.15); } .color[data-v-370b8428]:after { /*width: 44px;*/ /*height: 44px;*/ width: 36px; height: 36px; margin: 6px; border: 3px solid white; } .color.is-light[data-v-370b8428]:after { border-color: #555555; } .color.selected[data-v-370b8428]:before, .color.selected[data-v-370b8428]:after { transition: opacity 0.45s; opacity: 1; } ";style.type = 'text/css';if (style.styleSheet) {
+      style.styleSheet.cssText = css;
+    } else {
+      style.appendChild(document.createTextNode(css));
+    }head.appendChild(style);
+  }
+})();
 
+function arrayIncludes(arr, obj) {
+  var i = arr.length;
+  while (i--) {
+    if (arr[i] === obj) {
+      return true;
+    }
+  }
+  return false;
+}
 
+function valuesOfObj(obj) {
+  var values = [];
+  Object.keys(obj).forEach(function (key) {
+    values.push(obj[key]);
+  });
+  return values;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var Picker = {render: function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"color-wrapper"},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.subPalette !== undefined),expression:"subPalette !== undefined"}],staticClass:"color back-icon",on:{"click":function($event){_vm.subPalette = undefined;}}},[_c('svg',{attrs:{"fill":"#000000","height":"54","viewBox":"0 0 24 24","width":"24","xmlns":"http://www.w3.org/2000/svg"}},[_c('path',{attrs:{"d":"M0 0h24v24H0z","fill":"none"}}),_c('path',{attrs:{"d":"M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"}})])]),_vm._l((_vm.colors),function(color){return _c('div',{key:color.name,staticClass:"color",class:{selected: color.value === _vm.value || _vm.isTintOfSelected(color), 'is-light': _vm.colorIsLight(color.value)},style:({background: color.value}),attrs:{"title":color.name},on:{"click":function($event){$event.stopPropagation();_vm.click(color);}}})})],2)},staticRenderFns: [],_scopeId: 'data-v-370b8428',
+var Picker = { render: function render() {
+    var _vm = this;var _h = _vm.$createElement;var _c = _vm._self._c || _h;return _c('div', { staticClass: "color-wrapper" }, [_c('div', { directives: [{ name: "show", rawName: "v-show", value: _vm.subPalette !== undefined, expression: "subPalette !== undefined" }], staticClass: "color back-icon", on: { "click": function click($event) {
+          _vm.subPalette = undefined;
+        } } }, [_c('svg', { attrs: { "fill": "#000000", "height": "54", "viewBox": "0 0 24 24", "width": "24", "xmlns": "http://www.w3.org/2000/svg" } }, [_c('path', { attrs: { "d": "M0 0h24v24H0z", "fill": "none" } }), _c('path', { attrs: { "d": "M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" } })])]), _vm._l(_vm.colors, function (color) {
+      return _c('div', { key: color.name, staticClass: "color", class: { selected: color.value === _vm.value || _vm.isTintOfSelected(color), 'is-light': _vm.colorIsLight(color.value) }, style: { background: color.value }, attrs: { "title": color.name }, on: { "click": function click($event) {
+            $event.stopPropagation();_vm.click(color);
+          } } });
+    })], 2);
+  }, staticRenderFns: [], _scopeId: 'data-v-370b8428',
   name: 'color-picker',
   props: {
     value: {
@@ -7752,72 +7762,74 @@ var Picker = {render: function(){var _vm=this;var _h=_vm.$createElement;var _c=_
     }
   },
   methods: {
-    colorIsLight (color) {
-      return colorIsLight(color, 231)
+    colorIsLight: function colorIsLight$$1(color) {
+      return colorIsLight(color, 231);
     },
-    click (color) {
-      if (this.useSpectrumPicker && typeof this.currentPalette[color.name] === 'object') {
+    click: function click(color) {
+      if (this.useSpectrumPicker && _typeof$1(this.currentPalette[color.name]) === 'object') {
         this.subPalette = color.name;
-        if (this.isTintOfSelected(color)) return
+        if (this.isTintOfSelected(color)) return;
         this.selectedColorName = color.name;
       }
       this.$emit('change', color.value);
     },
-    isTintOfSelected (color) {
-      return this.selectedColorName === color.name && Object.values(this.currentPalette[this.selectedColorName]).includes(this.value)
+    isTintOfSelected: function isTintOfSelected(color) {
+      return this.selectedColorName === color.name && arrayIncludes(valuesOfObj(this.currentPalette[this.selectedColorName]), this.value);
     },
-    getDefaultColor (colorObj) {
-      if (colorObj[this.defaultTint]) return colorObj[this.defaultTint]
-      else return Object.values(colorObj)[Math.round(Object.keys(colorObj).length / 2) - 1] // get the color in the middle
+    getDefaultColor: function getDefaultColor(colorObj) {
+      if (colorObj[this.defaultTint]) return colorObj[this.defaultTint];else return valuesOfObj(colorObj)[Math.round(Object.keys(colorObj).length / 2) - 1]; // get the color in the middle
     }
   },
   computed: {
-    colors () {
-      const colors = [];
-      const palette = this.subPalette ? this.currentPalette[this.subPalette] : this.currentPalette;
-      const subName = this.subPalette ? this.subPalette + ' - ' : '';
-      for (let [key, value] of Object.entries(palette)) {
+    colors: function colors() {
+      var _this = this;
+
+      var colors = [];
+      var palette = this.subPalette ? this.currentPalette[this.subPalette] : this.currentPalette;
+      var subName = this.subPalette ? this.subPalette + ' - ' : '';
+
+      Object.keys(palette).forEach(function (key) {
+        var value = palette[key];
         colors.push({
           name: subName + key,
-          value: typeof value === 'string' ? value : this.getDefaultColor(value)
+          value: typeof value === 'string' ? value : _this.getDefaultColor(value)
         });
-      }
-      return colors
+      });
+      return colors;
     },
-    currentPalette () {
-      if (!this.palette) return materialPalette
-      else if (typeof this.palette === 'string') {
-        const availablePalettes = {
+    currentPalette: function currentPalette() {
+      if (!this.palette) return materialPalette;else if (typeof this.palette === 'string') {
+        var availablePalettes = {
           'material': materialPalette,
           'material-full': fullMaterialPalette,
           'material-accent': accentMaterialPalette
         };
-        if (!Object.keys(availablePalettes).includes(this.palette)) {
-          console.error('You passed in an unknown palette string. Following palettes are available:', Object.keys(availablePalettes));
-        }
-        else return availablePalettes[this.palette]
-      }
-      else return this.palette
+        console.assert(arrayIncludes(Object.keys(availablePalettes), this.palette), 'You passed in an unknown palette string. Following palettes are available:' + Object.keys(availablePalettes));
+        return availablePalettes[this.palette];
+      } else return this.palette;
     }
   },
-  data () {
+  data: function data() {
     return {
       subPalette: undefined,
       selectedColorName: undefined,
       privateCurrentPalette: undefined
-    }
+    };
   },
-  created () {
-    if (!this.value || this.value.length !== 7 || this.selectedColorName) return // value must be in hex format, eg: #ffffff
-    for (let [name, valueOrObject] of Object.entries(this.currentPalette)) {
-      const values = typeof valueOrObject === 'string' ? [valueOrObject] : Object.values(valueOrObject);
-      for (let value of values) {
-        if (value === this.value) {
-          this.selectedColorName = name;
-          return
+  created: function created() {
+    var _this2 = this;
+
+    if (!this.value || this.value.length !== 7 || this.selectedColorName) return; // value must be in hex format, eg: #ffffff
+    Object.keys(this.currentPalette).forEach(function (key) {
+      var valueOrObject = _this2.currentPalette[key];
+      var values = typeof valueOrObject === 'string' ? [valueOrObject] : valuesOfObj(valueOrObject);
+      for (var i in values) {
+        if (values[i] === _this2.value) {
+          _this2.selectedColorName = name;
+          return;
         }
       }
-    }
+    });
   }
 };
 
