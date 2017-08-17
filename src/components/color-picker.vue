@@ -1,11 +1,18 @@
 <template>
-  <div class="color-wrapper">
+  <div class="color-wrapper" :style="{width: wrapperSize}">
     <div
       v-show="subPalette !== undefined"
       @click="subPalette = undefined"
-      class="color back-icon"
+      class="back-icon"
+      :style="{margin: colorMargin + 'px', height: colorSizePx, width: colorSizePx}"
     >
-      <svg fill="#000000" height="54" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        fill="#000000"
+        :height="colorSize"
+        viewBox="0 0 24 24"
+        :width="colorSize / 2"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <path d="M0 0h24v24H0z" fill="none"/>
         <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
       </svg>
@@ -16,9 +23,23 @@
       :key="color.name"
       @click.stop="click(color)"
       class="color"
-      :style="{background: color.value}"
-      :class="{selected: color.value === value || isTintOfSelected(color), 'is-light': colorIsLight(color.value)}"
+      :style="getColorStyle(color)"
       :title="color.name">
+
+      <span
+        class="invisible"
+        :class="{visible: color.value.toLowerCase() === value.toLowerCase() || isTintOfSelected(color), 'is-light': colorIsLight(color.value)}"
+      >
+        <span
+          :style="{width: colorSize - 8 + 'px', height: colorSize - 8 + 'px'}"
+          class="outer-circle"
+        ></span>
+
+         <span
+           :style="{width: colorSize - 22 + 'px', height: colorSize - 22 + 'px'}"
+           class="inner-circle"
+         ></span>
+      </span>
     </div>
   </div>
 </template>
@@ -58,6 +79,18 @@
         type: [String, Object],
         required: false
       },
+      colorSize: {
+        type: Number,
+        default: 58
+      },
+      colorsPerRow: {
+        type: Number,
+        default: 5
+      },
+      colorMargin: {
+        type: Number,
+        default: 6
+      },
       defaultTint: {
         type: [Number, String],
         default: 500
@@ -68,8 +101,16 @@
       }
     },
     methods: {
+      getColorStyle(color) {
+        return {
+          background: color.value,
+          margin: this.colorMargin + 'px',
+          height: this.colorSizePx,
+          width: this.colorSizePx
+        }
+      },
       colorIsLight(color) {
-        return colorIsLight(color, 231)
+        return colorIsLight(color, 210)
       },
       click(color) {
         if (this.useSpectrumPicker && typeof this.currentPalette[color.name] === 'object') {
@@ -114,6 +155,12 @@
           return availablePalettes[this.palette]
         }
         else return this.palette
+      },
+      wrapperSize() {
+        return ((this.colorSize * this.colorsPerRow) + (this.colorMargin * this.colorsPerRow * 2)) + 'px'
+      },
+      colorSizePx() {
+        return this.colorSize + 'px'
       }
     },
     data() {
@@ -140,56 +187,53 @@
 </script>
 
 <style scoped>
-  .color-wrapper {
-    width: 350px;
+  .color, .back-icon {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline-style: none;
+    -webkit-touch-callout: none;
+    cursor: pointer;
   }
 
   .color {
     display: inline-block;
-    height: 54px;
-    width: 54px;
     border-radius: 100%;
-    margin: 8px;
+    position: relative;
   }
 
-  .color.back-icon {
+  .back-icon {
+    display: inline-block;
     text-align: center;
     float: left;
   }
 
-  .color:before,
-  .color:after {
-    content: '';
-    position: absolute;
-    border-radius: 100%;
+  .invisible {
     opacity: 0;
-    transition: opacity 0.25s;
+    transition: opacity 0.33s;
   }
 
-  .color:before {
-    /*width: 54px;*/
-    /*height: 54px;*/
-    width: 46px;
-    height: 46px;
-    border: 4px solid rgba(0, 0, 0, 0.15);
-  }
-
-  .color:after {
-    /*width: 44px;*/
-    /*height: 44px;*/
-    width: 36px;
-    height: 36px;
-    margin: 6px;
-    border: 3px solid white;
-  }
-
-  .color.is-light:after {
-    border-color: #555555;
-  }
-
-  .color.selected:before,
-  .color.selected:after {
-    transition: opacity 0.45s;
+  .visible {
     opacity: 1;
+    transition: opacity 0.47s;
+  }
+
+  .outer-circle {
+    position: absolute;
+    border: 4px solid rgba(0, 0, 0, 0.22);
+    border-radius: 100%;
+    margin: 0;
+  }
+
+  .inner-circle {
+    position: absolute;
+    border: 4px solid white;
+    border-radius: 100%;
+    margin: 7px
+  }
+
+  .is-light .inner-circle {
+    border-color: #555555;
   }
 </style>

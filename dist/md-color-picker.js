@@ -7707,7 +7707,7 @@ var _typeof$1 = typeof Symbol === "function" && typeof Symbol.iterator === "symb
   if (typeof document !== 'undefined') {
     var head = document.head || document.getElementsByTagName('head')[0],
         style = document.createElement('style'),
-        css = " .color-wrapper[data-v-370b8428] { width: 350px; } .color[data-v-370b8428] { display: inline-block; height: 54px; width: 54px; border-radius: 100%; margin: 8px; } .color.back-icon[data-v-370b8428] { text-align: center; float: left; } .color[data-v-370b8428]:before, .color[data-v-370b8428]:after { content: ''; position: absolute; border-radius: 100%; opacity: 0; transition: opacity 0.25s; } .color[data-v-370b8428]:before { /*width: 54px;*/ /*height: 54px;*/ width: 46px; height: 46px; border: 4px solid rgba(0, 0, 0, 0.15); } .color[data-v-370b8428]:after { /*width: 44px;*/ /*height: 44px;*/ width: 36px; height: 36px; margin: 6px; border: 3px solid white; } .color.is-light[data-v-370b8428]:after { border-color: #555555; } .color.selected[data-v-370b8428]:before, .color.selected[data-v-370b8428]:after { transition: opacity 0.45s; opacity: 1; } ";style.type = 'text/css';if (style.styleSheet) {
+        css = " .color[data-v-370b8428], .back-icon[data-v-370b8428] { -webkit-tap-highlight-color: transparent; -webkit-user-select: none; -ms-user-select: none; user-select: none; outline-style: none; -webkit-touch-callout: none; cursor: pointer; } .color[data-v-370b8428] { display: inline-block; border-radius: 100%; position: relative; } .back-icon[data-v-370b8428] { display: inline-block; text-align: center; float: left; } .invisible[data-v-370b8428] { opacity: 0; transition: opacity 0.33s; } .visible[data-v-370b8428] { opacity: 1; transition: opacity 0.47s; } .outer-circle[data-v-370b8428] { position: absolute; border: 4px solid rgba(0, 0, 0, 0.22); border-radius: 100%; margin: 0; } .inner-circle[data-v-370b8428] { position: absolute; border: 4px solid white; border-radius: 100%; margin: 7px } .is-light .inner-circle[data-v-370b8428] { border-color: #555555; } ";style.type = 'text/css';if (style.styleSheet) {
       style.styleSheet.cssText = css;
     } else {
       style.appendChild(document.createTextNode(css));
@@ -7734,12 +7734,12 @@ function valuesOfObj(obj) {
 }
 
 var Picker = { render: function render() {
-    var _vm = this;var _h = _vm.$createElement;var _c = _vm._self._c || _h;return _c('div', { staticClass: "color-wrapper" }, [_c('div', { directives: [{ name: "show", rawName: "v-show", value: _vm.subPalette !== undefined, expression: "subPalette !== undefined" }], staticClass: "color back-icon", on: { "click": function click($event) {
+    var _vm = this;var _h = _vm.$createElement;var _c = _vm._self._c || _h;return _c('div', { staticClass: "color-wrapper", style: { width: _vm.wrapperSize } }, [_c('div', { directives: [{ name: "show", rawName: "v-show", value: _vm.subPalette !== undefined, expression: "subPalette !== undefined" }], staticClass: "back-icon", style: { margin: _vm.colorMargin + 'px', height: _vm.colorSizePx, width: _vm.colorSizePx }, on: { "click": function click($event) {
           _vm.subPalette = undefined;
-        } } }, [_c('svg', { attrs: { "fill": "#000000", "height": "54", "viewBox": "0 0 24 24", "width": "24", "xmlns": "http://www.w3.org/2000/svg" } }, [_c('path', { attrs: { "d": "M0 0h24v24H0z", "fill": "none" } }), _c('path', { attrs: { "d": "M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" } })])]), _vm._l(_vm.colors, function (color) {
-      return _c('div', { key: color.name, staticClass: "color", class: { selected: color.value === _vm.value || _vm.isTintOfSelected(color), 'is-light': _vm.colorIsLight(color.value) }, style: { background: color.value }, attrs: { "title": color.name }, on: { "click": function click($event) {
+        } } }, [_c('svg', { attrs: { "fill": "#000000", "height": _vm.colorSize, "viewBox": "0 0 24 24", "width": _vm.colorSize / 2, "xmlns": "http://www.w3.org/2000/svg" } }, [_c('path', { attrs: { "d": "M0 0h24v24H0z", "fill": "none" } }), _c('path', { attrs: { "d": "M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" } })])]), _vm._l(_vm.colors, function (color) {
+      return _c('div', { key: color.name, staticClass: "color", style: _vm.getColorStyle(color), attrs: { "title": color.name }, on: { "click": function click($event) {
             $event.stopPropagation();_vm.click(color);
-          } } });
+          } } }, [_c('span', { staticClass: "invisible", class: { visible: color.value.toLowerCase() === _vm.value.toLowerCase() || _vm.isTintOfSelected(color), 'is-light': _vm.colorIsLight(color.value) } }, [_c('span', { staticClass: "outer-circle", style: { width: _vm.colorSize - 8 + 'px', height: _vm.colorSize - 8 + 'px' } }), _vm._v(" "), _c('span', { staticClass: "inner-circle", style: { width: _vm.colorSize - 22 + 'px', height: _vm.colorSize - 22 + 'px' } })])]);
     })], 2);
   }, staticRenderFns: [], _scopeId: 'data-v-370b8428',
   name: 'color-picker',
@@ -7752,6 +7752,18 @@ var Picker = { render: function render() {
       type: [String, Object],
       required: false
     },
+    colorSize: {
+      type: Number,
+      default: 58
+    },
+    colorsPerRow: {
+      type: Number,
+      default: 5
+    },
+    colorMargin: {
+      type: Number,
+      default: 6
+    },
     defaultTint: {
       type: [Number, String],
       default: 500
@@ -7762,8 +7774,16 @@ var Picker = { render: function render() {
     }
   },
   methods: {
+    getColorStyle: function getColorStyle(color) {
+      return {
+        background: color.value,
+        margin: this.colorMargin + 'px',
+        height: this.colorSizePx,
+        width: this.colorSizePx
+      };
+    },
     colorIsLight: function colorIsLight$$1(color) {
-      return colorIsLight(color, 231);
+      return colorIsLight(color, 210);
     },
     click: function click(color) {
       if (this.useSpectrumPicker && _typeof$1(this.currentPalette[color.name]) === 'object') {
@@ -7807,6 +7827,12 @@ var Picker = { render: function render() {
         console.assert(arrayIncludes(Object.keys(availablePalettes), this.palette), 'You passed in an unknown palette string. Following palettes are available:' + Object.keys(availablePalettes));
         return availablePalettes[this.palette];
       } else return this.palette;
+    },
+    wrapperSize: function wrapperSize() {
+      return this.colorSize * this.colorsPerRow + this.colorMargin * this.colorsPerRow * 2 + 'px';
+    },
+    colorSizePx: function colorSizePx() {
+      return this.colorSize + 'px';
     }
   },
   data: function data() {
