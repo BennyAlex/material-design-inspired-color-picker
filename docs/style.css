@@ -3,10 +3,21 @@ html, body {
     font-family: Trebuchet, Arial, sans-serif;
     padding: 0 5px;
     padding-bottom: 35px;
+    font-size: 19px;
 }
 
-.color-wrapper {
-    margin: 0 auto;
+.no-text-highlight {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline-style: none;
+    -webkit-touch-callout: none;
+    cursor: default;
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }
 
 .center {
@@ -14,6 +25,10 @@ html, body {
 }
 
 .bold {
+    font-weight: bold;
+}
+
+.bolder {
     font-weight: 700;
 }
 
@@ -97,5 +112,5 @@ button:active:before {
     width: 120%;
     padding-top: 120%;
 
-    transition: width .4s ease-out, padding-top .4s ease-out;
+    transition: width .2s ease-out, padding-top .2s ease-out;
 }

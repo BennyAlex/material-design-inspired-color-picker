@@ -7,13 +7,18 @@
 </head>
 <body>
 <div
-  style="width: 100%; font-size: 26px; text-decoration: underline; padding-top: 42px; margin: 0 auto; margin-bottom: 57px;"
+  style="width: 100%; font-size: 26px; text-decoration: underline; padding-top: 42px; margin: 0 auto; margin-bottom: 15px;"
   class="center bold">
   This is the demo page for material-design-inspired-color-picker
 </div>
+<div
+  style="width: 100%; font-size: 21px; margin: 0 auto; margin-bottom: 35px;"
+  class="center bold">
+  <a style="text-decoration: none" href="https://github.com/BennyAlex/material-design-inspired-color-picker/" target="_blank">Fork me on github!</a>
+</div>
 <div class="content center">
   <div
-    id="selected" >
+    id="selected">
     selected color:
     <span class="bold" id="selectedColor">#ffc107</span>
   </div>
@@ -22,40 +27,70 @@
 <div class="content">
   <div class="flex">
 
-    <md-color-picker value="#ffc107" palette="material-full" use-spectrum-picker="true"
-                     default-tint="500"></md-color-picker>
+    <md-color-picker id="picker" value="#FFFFFF" palette="material-full" use-spectrum-picker="true"
+                     default-tint="500" color-margin="6" color-size="58"></md-color-picker>
   </div>
 
   <div style="flex-basis: 5%"></div>
 
-  <div class="flex center">
-    <h3>Selected palette: <span class="bold" id="palette">material-full</span></h3>
-    <button onclick="selectPalette('material')"><span>select material palette</span></button>
-    <button onclick="selectPalette('material-full')"><span>select material-full palette</span></button>
-    <button onclick="selectPalette('material-accent')"><span>select material-accent palette</span></button>
+  <div class="flex no-text-highlight" style="padding-top: 15px">
 
-    <h3>Spectrum picker: <span id="spectrum" class="bold">activated</span></h3>
-    <button onclick="toggleSpectrumPicker()"><span>Toggle spectrum picker</span></button>
+    Palette:
+    <select title="Tint" onchange="changeProp(this.value, 'picker', 'palette')" class="bold cursor-pointer">
+      <option>material</option>
+      <option selected>material-full</option>
+      <option>material-accent</option>
+    </select>
 
-    <h3>Default Tint: <span id="tint" class="bold">500</span></h3>
-    <button onclick="setTint(100)"><span>set Tint to 100</span></button>
-    <button onclick="setTint(300)"><span>set Tint to 300</span></button>
-    <button onclick="setTint(500)"><span>set Tint to 500</span></button>
-    <button onclick="setTint(700)"><span>set Tint to 700</span></button>
-    <button onclick="setTint(900)"><span>set Tint to 900</span></button>
+    <br><br>
+
+    <label class="cursor-pointer">use spectrum picker: <input type="checkbox" checked
+                                                              onclick="changeProp(this.checked, 'picker', 'useSpectrumPicker')"
+                                                              class="bold"></label>
+
+    <br><br>
+
+    Default Tint:
+    <select title="Tint" onchange="changeProp(this.value, 'picker', 'defaultTint')"
+            class="bold cursor-pointer">
+      <option>100</option>
+      <option>200</option>
+      <option>300</option>
+      <option>400</option>
+      <option selected>500</option>
+      <option>600</option>
+      <option>700</option>
+      <option>800</option>
+      <option>900</option>
+      <option>a100</option>
+      <option>a200</option>
+      <option>a400</option>
+      <option>a700</option>
+    </select>
+
+    <br><br>
+    Color Size in pixel: <input type="number" title="Color Size"
+                                onchange="changeProp(this.value, 'picker', 'colorSize')" class="bold cursor-pointer"
+                                value="58">
+
+    <br><br>
+    Color Distance in pixel: <input type="number" title="Color Distance"
+                                    onchange="changeProp(this.value, 'picker', 'colorMargin')"
+                                    class="bold cursor-pointer" value="6">
+
+    <br><br>
+    Colors per Row: <input type="number" title="Colors per Row"
+                           onchange="changeProp(this.value, 'picker', 'colorsPerRow')"
+                           class="bold cursor-pointer" value="5">
   </div>
 </div>
 
 <script src="md-color-picker.js"></script>
 
 <script>
-  var picker = document.getElementsByTagName('md-color-picker')[0]
-  var palette = document.getElementById('palette')
-  var spectrum = document.getElementById('spectrum')
-  var selectedTint = document.getElementById('tint')
+  var picker = document.getElementById('picker')
   var selectedColorDiv = document.getElementById('selected')
   var selectedColorSpan = document.getElementById('selectedColor')
-
   picker.addEventListener('change', function (event) {
     var color = event.detail[0]
     console.log('Selected Color:', color)
@@ -74,22 +109,10 @@
     selectedColorSpan.innerHTML = color
   })
 
-  function selectPalette(str) {
-    picker.palette = str
-    palette.innerHTML = str
+  function changeProp(value, targetID, targetProp) {
+    var tar = document.getElementById(targetID)
+    tar[targetProp] = value
   }
-
-  function toggleSpectrumPicker() {
-    picker.useSpectrumPicker = !picker.useSpectrumPicker
-    spectrum.innerHTML = picker.useSpectrumPicker ? 'activated' : 'disabled'
-  }
-
-  function setTint(tint) {
-    picker.defaultTint = tint
-    selectedTint.innerHTML = tint
-  }
-
 </script>
 </body>
 </html>
-
