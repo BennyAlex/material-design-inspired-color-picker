@@ -27,7 +27,6 @@
       :title="color.name">
 
       <span
-        class="invisible"
         :class="{visible: color.value.toLowerCase() === value.toLowerCase() || isTintOfSelected(color), 'is-light': colorIsLight(color.value)}"
       >
         <span
@@ -166,8 +165,7 @@
     data() {
       return {
         subPalette: undefined,
-        selectedColorName: undefined,
-        privateCurrentPalette: undefined
+        selectedColorName: undefined
       }
     },
     created() {
@@ -209,31 +207,34 @@
     float: left;
   }
 
-  .invisible {
-    opacity: 0;
-    transition: opacity 0.33s;
-  }
-
-  .visible {
-    opacity: 1;
-    transition: opacity 0.47s;
-  }
-
   .outer-circle {
     position: absolute;
-    border: 4px solid rgba(0, 0, 0, 0.22);
+    border: 4px solid rgba(0, 0, 0, 0.0);
     border-radius: 100%;
     margin: 0;
+    transition: all 0.45s;
   }
 
   .inner-circle {
     position: absolute;
-    border: 4px solid white;
+    border: 4px solid rgba(0, 0, 0, 0.0);
     border-radius: 100%;
-    margin: 7px
+    margin: 7px;
+    transition: all 0.45s;
   }
 
-  .is-light .inner-circle {
+  .visible .inner-circle {
+    border: 4px solid rgba(255, 255, 255, 1);
+    transition: all 1.1s;
+  }
+
+  .visible .outer-circle {
+    border: 4px solid rgba(0, 0, 0, 0.22);
+    transition: all 1.1s;
+  }
+
+  .visible.is-light .inner-circle {
     border-color: #555555;
+    transition: all 1.1s;
   }
 </style>

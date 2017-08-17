@@ -7707,7 +7707,7 @@ var _typeof$1 = typeof Symbol === "function" && typeof Symbol.iterator === "symb
   if (typeof document !== 'undefined') {
     var head = document.head || document.getElementsByTagName('head')[0],
         style = document.createElement('style'),
-        css = " .color[data-v-370b8428], .back-icon[data-v-370b8428] { -webkit-tap-highlight-color: transparent; -webkit-user-select: none; -ms-user-select: none; user-select: none; outline-style: none; -webkit-touch-callout: none; cursor: pointer; } .color[data-v-370b8428] { display: inline-block; border-radius: 100%; position: relative; } .back-icon[data-v-370b8428] { display: inline-block; text-align: center; float: left; } .invisible[data-v-370b8428] { opacity: 0; transition: opacity 0.33s; } .visible[data-v-370b8428] { opacity: 1; transition: opacity 0.47s; } .outer-circle[data-v-370b8428] { position: absolute; border: 4px solid rgba(0, 0, 0, 0.22); border-radius: 100%; margin: 0; } .inner-circle[data-v-370b8428] { position: absolute; border: 4px solid white; border-radius: 100%; margin: 7px } .is-light .inner-circle[data-v-370b8428] { border-color: #555555; } ";style.type = 'text/css';if (style.styleSheet) {
+        css = " .color[data-v-370b8428], .back-icon[data-v-370b8428] { -webkit-tap-highlight-color: transparent; -webkit-user-select: none; -ms-user-select: none; user-select: none; outline-style: none; -webkit-touch-callout: none; cursor: pointer; } .color[data-v-370b8428] { display: inline-block; border-radius: 100%; position: relative; } .back-icon[data-v-370b8428] { display: inline-block; text-align: center; float: left; } .outer-circle[data-v-370b8428] { position: absolute; border: 4px solid rgba(0, 0, 0, 0.0); border-radius: 100%; margin: 0; transition: all 0.45s; } .inner-circle[data-v-370b8428] { position: absolute; border: 4px solid rgba(0, 0, 0, 0.0); border-radius: 100%; margin: 7px; transition: all 0.45s; } .visible .inner-circle[data-v-370b8428] { border: 4px solid rgba(255, 255, 255, 1); transition: all 1.1s; } .visible .outer-circle[data-v-370b8428] { border: 4px solid rgba(0, 0, 0, 0.22); transition: all 1.1s; } .visible.is-light .inner-circle[data-v-370b8428] { border-color: #555555; transition: all 1.1s; } ";style.type = 'text/css';if (style.styleSheet) {
       style.styleSheet.cssText = css;
     } else {
       style.appendChild(document.createTextNode(css));
@@ -7739,7 +7739,7 @@ var Picker = { render: function render() {
         } } }, [_c('svg', { attrs: { "fill": "#000000", "height": _vm.colorSize, "viewBox": "0 0 24 24", "width": _vm.colorSize / 2, "xmlns": "http://www.w3.org/2000/svg" } }, [_c('path', { attrs: { "d": "M0 0h24v24H0z", "fill": "none" } }), _c('path', { attrs: { "d": "M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" } })])]), _vm._l(_vm.colors, function (color) {
       return _c('div', { key: color.name, staticClass: "color", style: _vm.getColorStyle(color), attrs: { "title": color.name }, on: { "click": function click($event) {
             $event.stopPropagation();_vm.click(color);
-          } } }, [_c('span', { staticClass: "invisible", class: { visible: color.value.toLowerCase() === _vm.value.toLowerCase() || _vm.isTintOfSelected(color), 'is-light': _vm.colorIsLight(color.value) } }, [_c('span', { staticClass: "outer-circle", style: { width: _vm.colorSize - 8 + 'px', height: _vm.colorSize - 8 + 'px' } }), _vm._v(" "), _c('span', { staticClass: "inner-circle", style: { width: _vm.colorSize - 22 + 'px', height: _vm.colorSize - 22 + 'px' } })])]);
+          } } }, [_c('span', { class: { visible: color.value.toLowerCase() === _vm.value.toLowerCase() || _vm.isTintOfSelected(color), 'is-light': _vm.colorIsLight(color.value) } }, [_c('span', { staticClass: "outer-circle", style: { width: _vm.colorSize - 8 + 'px', height: _vm.colorSize - 8 + 'px' } }), _vm._v(" "), _c('span', { staticClass: "inner-circle", style: { width: _vm.colorSize - 22 + 'px', height: _vm.colorSize - 22 + 'px' } })])]);
     })], 2);
   }, staticRenderFns: [], _scopeId: 'data-v-370b8428',
   name: 'color-picker',
@@ -7838,8 +7838,7 @@ var Picker = { render: function render() {
   data: function data() {
     return {
       subPalette: undefined,
-      selectedColorName: undefined,
-      privateCurrentPalette: undefined
+      selectedColorName: undefined
     };
   },
   created: function created() {

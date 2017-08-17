@@ -7,6 +7,23 @@ import babel from 'rollup-plugin-babel';
 
 const production = process.env.NODE_ENV === 'production'
 
+const devPlugins = [
+  replace({
+    'process.env.NODE_ENV': JSON.stringify('develop')
+  }),
+  nodeResolve({
+    module: true,
+    jsnext: true,
+    main: true
+  }),
+  vue({
+    compileTemplate: true,
+    css: true
+  }),
+  babel({
+    exclude: ['node_modules/**', '*.vue', '**.vue'],
+  })
+]
 
 const productionPlugins = [
   replace({
@@ -26,46 +43,19 @@ const productionPlugins = [
   })
 ]
 
-let rollups = []
-
-if (production) {
-  rollups = [
-    {
-      entry: 'src/main.js',
-      dest: 'dist/md-color-picker.js',
-      format: 'es',
-      plugins: productionPlugins
-    },
-    {
-      entry: 'src/main.js',
-      dest: 'docs/md-color-picker.js',
-      format: 'es',
-      plugins: productionPlugins
-    }
-  ]
-}
-else {
-  console.log('Running in development mode.')
-  // develop build
-  rollups = {
-    entry: 'src/main.js',
-    dest: 'docs/md-color-picker.js',
-    format: 'es',
-    plugins: [
-      replace({
-        'process.env.NODE_ENV': JSON.stringify('develop')
-      }),
-      nodeResolve({
-        module: true,
-        jsnext: true,
-        main: true
-      }),
-      vue({
-        compileTemplate: true,
-        css: true
-      })
-    ]
-  }
+const devRollup = {
+  entry: 'src/main.js',
+  dest: 'docs/md-color-picker.js',
+  format: 'es',
+  plugins: devPlugins
 }
 
-export default rollups
+const productionRollup = {
+  entry: 'src/main.js',
+  dest: 'dist/md-color-picker.js',
+  format: 'es',
+  plugins: productionPlugins
+}
+
+
+export default production ? [devRollup, productionRollup] : devRollup
