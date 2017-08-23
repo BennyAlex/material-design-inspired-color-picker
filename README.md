@@ -39,25 +39,34 @@ A custom elements polyfill is included, so it will work in even in browsers wich
 
 ## Api
 The picker let you pass in some options and attributes so you can customize it.
+
+Note: In html the attributes are seperated by a hyphen instead of using camelCase in JavaScript.
+
 Following properties can be parsed into the picker:
 
-|propertyname|type|default| example|
+|propertyname (JS / HTML)|type|default| example|
 | :---: | :---:| :---:| :---: |
-| value | string | none | #f1c5a9 |
+| colorMargin / color-margin (in px) | number | 6 | 12 |
+| colorsPerRow / colors-per-row | number | 5 | 4 |
+| colorSize / color-size (in px) | number | 58 | 48 |
+| defaultTint / default-tint | number or string | 500 | '200' |
 | palette | string or object | 'material' | 'material-full' |
-| defaultTint in js or default-tint in HTML! | number or string | 500 | '200' |
-| useSpectrumPicker in js or use-spectrum-picker in HTML!| bool | true | false |
+| useSpectrumPicker / use-spectrum-picker | bool | true | false |
+| value | string | none | #f1c5a9 |
 
-**Explanation:**
-* value : the color which is selected. Must be a hex number with 6 digits and a hashtag.
+**Description:**
+* colorMargin : The distance between the colors
+* colorsPerRow : The number of colors per row
+* colorSize : The size of each color circle
+* defaultTint : this is the tint for each color wich will be shown at the beginning. Material colors default tint is 500. For custom palettes you can also use strings.
 * palette : the palette with all colors. If it is a string, the picker will use a built in palette. Currently the following palettes are available:
 ````
 material : standard material colors 
 material-full : the material colors including the accent colors 
 material-accent : only the accent material colors
 ````
-* defaultTint : this is the tint for each color wich will be shown at the beginning. Material colors default tint is 500. For custom palettes you can also use strings.
 * useSpectrumPicker : if false, the other color tints can not be selected, so only the color wich matches default tint is selectable.
+* value : the color which is selected. Must be a hex number with 6 digits and a hashtag.
 
 **Full example:**
 ````html

@@ -1,117 +1,288 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>material-design-inspired-color-picker demo</title>
-  <link href="style.css" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MATERIAL DESIGN INSPIRED COLOR PICKER</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <style>
+    body, h1, h2, h3, h4, h5, h6 {
+      font-family: "Raleway", sans-serif
+    }
+
+    body, html {
+      height: 100%;
+      line-height: 1;
+    }
+
+    .no-text-highlight {
+      -webkit-tap-highlight-color: transparent;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      -webkit-touch-callout: none;
+      tap-highlight-color: transparent;
+      user-select: none;
+      outline-style: none;
+      cursor: default;
+    }
+
+    .text-highlight, .text-highlight-all, td {
+      -webkit-user-select: text;
+      -moz-user-select: text;
+      -ms-user-select: text;
+      user-select: text;
+
+      -webkit-touch-callout: unset;
+      -webkit-tap-highlight-color: initial;
+      tap-highlight-color: initial;
+      outline-style: initial;
+      cursor: text;
+    }
+
+    .text-highlight-all, td {
+      -webkit-user-select: all !important;
+      -moz-user-select: all !important;
+      -ms-user-select: all !important;
+      user-select: all !important;
+    }
+
+    th, td {
+      padding: 0 13px !important;
+      height: 50px;
+      vertical-align: middle !important;
+      font-family: Verdana, sans-serif;
+    }
+
+    th {
+      background: #323232;
+      color: #ffffff;
+      height: 52px;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .center > div {
+      display: inline-block;
+    }
+
+    .defaultBarStyle {
+      background: #1e88e5;
+      color: #ffffff;
+    }
+
+    .red {
+      color: #df0000;
+    }
+
+    .blue {
+      color: #0000dd
+    }
+
+    .blue2 {
+      color: #00005a;
+    }
+
+    .brown {
+      color: #9a4029;
+    }
+  </style>
 </head>
-<body>
-<div
-  style="width: 100%; font-size: 26px; text-decoration: underline; padding-top: 42px; margin: 0 auto; margin-bottom: 15px;"
-  class="center bold">
-  This is the demo page for material-design-inspired-color-picker
+<body class="no-text-highlight">
+<div class="w3-bar defaultBarStyle w3-card"
+     style="line-height: 28px; padding-top: 11px; padding-bottom: 11px"
+     id="header">
+  <b class="w3-bar-item w3-mobile" style="font-size: 19px; letter-spacing: 2px">
+    MATERIAL DESIGN INSPIRED COLOR PICKER
+  </b>
+
+  <div class="w3-bar-item w3-right w3-mobile">
+    <a href="https://github.com/BennyAlex/material-design-inspired-color-picker" target="_blank"
+       style="text-decoration: none; padding: 5px 9px; border-radius: 50px; border-style: solid; border-width: 1px; border-color: inherit">
+      FORK ME ON GITHUB
+    </a>
+  </div>
+
 </div>
-<div
-  style="width: 100%; font-size: 21px; margin: 0 auto; margin-bottom: 35px;"
-  class="center bold">
-  <a style="text-decoration: none" href="https://github.com/BennyAlex/material-design-inspired-color-picker/" target="_blank">Fork me on github!</a>
-</div>
-<div class="content center">
-  <div
-    id="selected">
-    selected color:
-    <span class="bold" id="selectedColor">#ffc107</span>
+
+<div class="w3-container center">
+  <div>
+    <div style="font-size: 24px; margin-top: 27px; margin-bottom: 22px">selected color: <b
+      class="text-highlight-all" style="font-family: 'Courier New', monospace; " id="selectedHex">#1e88e5</b></div>
+
+    <md-color-picker id="picker" value="#1e88e5" palette="material-full"
+                     use-spectrum-picker="true"></md-color-picker>
   </div>
 </div>
 
-<div class="content">
-  <div class="flex">
+<div style="margin-top: 20px" class="w3-container">
+  <div style="font-size: 20px"><b>Live Code Example:</b></div>
+  <div style="margin-top: 8px !important; margin-bottom: 3px !important;" class="w3-code red text-highlight">
 
-    <md-color-picker id="picker" value="#FFFFFF" palette="material-full" use-spectrum-picker="true"
-                     default-tint="500" color-margin="6" color-size="58"></md-color-picker>
+    <span class="blue2">&lt;</span><span class="brown">md-color-picker</span> <span id="code">color-margin<span
+    class="blue">="6"</span> colors-per-row<span class="blue">="5"</span> color-size<span class="blue">="58"</span>
+      default-tint<span class="blue">="500"</span> palette<span class="blue">="material-full"</span>
+      use-spectrum-picker<span class="blue">="true"</span> value<span class="blue">="#1e88e5"</span></span><span
+    class="blue2">&gt;&lt;</span><span class="brown">md-color-picker</span><span class="blue2">&gt;</span>
+
   </div>
+</div>
 
-  <div style="flex-basis: 5%"></div>
-
-  <div class="flex no-text-highlight" style="padding-top: 15px">
-
-    Palette:
-    <select title="Tint" onchange="changeProp(this.value, 'picker', 'palette')" class="bold cursor-pointer">
-      <option>material</option>
-      <option selected>material-full</option>
-      <option>material-accent</option>
-    </select>
-
-    <br><br>
-
-    <label class="cursor-pointer">use spectrum picker: <input type="checkbox" checked
-                                                              onclick="changeProp(this.checked, 'picker', 'useSpectrumPicker')"
-                                                              class="bold"></label>
-
-    <br><br>
-
-    Default Tint:
-    <select title="Tint" onchange="changeProp(this.value, 'picker', 'defaultTint')"
-            class="bold cursor-pointer">
-      <option>100</option>
-      <option>200</option>
-      <option>300</option>
-      <option>400</option>
-      <option selected>500</option>
-      <option>600</option>
-      <option>700</option>
-      <option>800</option>
-      <option>900</option>
-      <option>a100</option>
-      <option>a200</option>
-      <option>a400</option>
-      <option>a700</option>
-    </select>
-
-    <br><br>
-    Color Size in pixel: <input type="number" title="Color Size"
-                                onchange="changeProp(this.value, 'picker', 'colorSize')" class="bold cursor-pointer"
-                                value="58">
-
-    <br><br>
-    Color Distance in pixel: <input type="number" title="Color Distance"
-                                    onchange="changeProp(this.value, 'picker', 'colorMargin')"
-                                    class="bold cursor-pointer" value="6">
-
-    <br><br>
-    Colors per Row: <input type="number" title="Colors per Row"
-                           onchange="changeProp(this.value, 'picker', 'colorsPerRow')"
-                           class="bold cursor-pointer" value="5">
+<div class="w3-container" style="font-size: 20px;">
+  <div class="w3-panel" style="background: #ffffcc; border-left: 6px solid #ffeb3b;">
+    <p><b>Note:</b> In html the attributes are seperated by a hyphen instead of using camelCase in JavaScript</p>
   </div>
+</div>
+
+<div class="w3-container" style="margin-top: 4px; margin-bottom: 40px; font-size: 17px">
+  <table class="w3-table w3-striped w3-border">
+    <tr>
+      <th>Attribute (JS / HTML)</th>
+      <th>Value</th>
+      <th>Description</th>
+    </tr>
+
+    <tr>
+      <td>colorMargin / color-margin (in px)</td>
+      <td>
+        <input type="number" title="Color Distance"
+               onchange="changeProp(this.value, 'picker', 'colorMargin')"
+               class="w3-input" value="6" min="0" max="50" maxlength="2">
+      </td>
+      <td>The distance between the colors</td>
+    </tr>
+
+    <tr>
+      <td>colorsPerRow / colors-per-row</td>
+      <td>
+        <input type="number" title="Colors per Row"
+               onchange="changeProp(this.value, 'picker', 'colorsPerRow')"
+               class="w3-input" value="5" max="25" min="1">
+      </td>
+      <td>The number of colors per row</td>
+    </tr>
+
+    <tr>
+      <td>colorSize / color-size (in px)</td>
+      <td>
+        <input type="number" title="Color Size"
+               onchange="changeProp(this.value, 'picker', 'colorSize')" class="w3-input"
+               value="58" min="24" max="175">
+      </td>
+      <td>The size of each color circle</td>
+    </tr>
+    <tr>
+      <td>defaultTint / default-tint</td>
+      <td>
+        <select title="Tint" onchange="changeProp(this.value, 'picker', 'defaultTint')"
+                class="w3-select">
+          <option>100</option>
+          <option>200</option>
+          <option>300</option>
+          <option>400</option>
+          <option selected>500</option>
+          <option>600</option>
+          <option>700</option>
+          <option>800</option>
+          <option>900</option>
+          <option>a100</option>
+          <option>a200</option>
+          <option>a400</option>
+          <option>a700</option>
+        </select>
+      </td>
+      <td>This is the tint for each color wich will be shown at the beginning. Material colors default tint is 500. For
+        custom palettes you can also use strings
+      </td>
+    </tr>
+    <tr>
+      <td>palette</td>
+      <td>
+        <select title="Tint" onchange="changeProp(this.value, 'picker', 'palette')" class="w3-select">
+          <option>material</option>
+          <option selected>material-full</option>
+          <option>material-accent</option>
+        </select>
+      </td>
+      <td>The palette with all colors. If it is a string, the picker will use a built in palette instead of your own
+      </td>
+    </tr>
+    <tr>
+      <td>useSpectrumPicker / use-spectrum-picker</td>
+      <td>
+        <input type="checkbox" checked class="w3-check"
+               onclick="changeProp(this.checked, 'picker', 'useSpectrumPicker')">
+      </td>
+      <td>If false, the other color tints can not be selected, so only the color wich matches default tint is
+        selectable
+      </td>
+    </tr>
+    <tr>
+      <td>value (not recommended to change manually)</td>
+      <td>
+        -
+      </td>
+      <td>The color which is selected. Must be a hex number with a hashtag followed by 6 digits</td>
+    </tr>
+  </table>
+
+</div>
+
+<div class="w3-container defaultBarStyle" id="footer">
+  <h4 class="w3-right">&copy; BennyAlex</h4>
 </div>
 
 <script src="md-color-picker.js"></script>
-
 <script>
   var picker = document.getElementById('picker')
-  var selectedColorDiv = document.getElementById('selected')
-  var selectedColorSpan = document.getElementById('selectedColor')
-  picker.addEventListener('change', function (event) {
+  var header = document.getElementById('header')
+  var footer = document.getElementById('footer')
+  var code = document.getElementById('code').children
+
+  codePropMapping = {
+    colorMargin: 0,
+    colorsPerRow: 1,
+    colorSize: 2,
+    defaultTint: 3,
+    palette: 4,
+    useSpectrumPicker: 5,
+    value: 6
+  }
+  var bl = '#000000'
+  var wh = '#ffffff'
+
+  function listenerEvent (event) {
     var color = event.detail[0]
     console.log('Selected Color:', color)
     picker.value = color
-    if (colorIsLight(color, 180)) {
-      selectedColorDiv.style.borderColor = 'black'
-      selectedColorSpan.style.color = 'black'
-      selectedColorDiv.style.color = 'black'
+    if (colorIsLight(color, 150)) {
+      header.style.color = bl
+      footer.style.color = bl
     }
     else {
-      selectedColorDiv.style.borderColor = 'white'
-      selectedColorSpan.style.color = 'white'
-      selectedColorDiv.style.color = 'white'
+      header.style.color = wh
+      footer.style.color = wh
     }
-    selectedColorDiv.style.background = color
-    selectedColorSpan.innerHTML = color
-  })
+    document.getElementById('selectedHex').innerHTML = color
+    header.style.background = color
+    footer.style.background = color
+    code[codePropMapping.value].innerHTML = '="' + color + '"'
+  }
 
-  function changeProp(value, targetID, targetProp) {
+  if (picker.addEventListener) {
+    picker.addEventListener('change', listenerEvent, false)
+  }
+  else {
+    picker.attachEvent('change', listenerEvent)
+  }
+
+  function changeProp (value, targetID, targetProp) {
     var tar = document.getElementById(targetID)
     tar[targetProp] = value
+    code[codePropMapping[targetProp]].innerHTML = '="' + value + '"'
   }
 </script>
 </body>
