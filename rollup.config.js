@@ -2,8 +2,8 @@ import vue from 'rollup-plugin-vue'
 import nodeResolve from 'rollup-plugin-node-resolve'
 import replace from 'rollup-plugin-replace'
 import uglify from 'rollup-plugin-uglify'
-import {minify} from 'uglify-es'
-import babel from 'rollup-plugin-babel';
+import { minify } from 'uglify-es'
+import babel from 'rollup-plugin-babel'
 
 const production = process.env.NODE_ENV === 'production'
 
@@ -21,7 +21,7 @@ const devPlugins = [
     css: true
   }),
   babel({
-    exclude: ['node_modules/**', '*.vue', '**.vue'],
+    exclude: ['node_modules/**', '*.vue', '**.vue']
   })
 ]
 
@@ -39,8 +39,9 @@ const productionPlugins = [
     css: true
   }),
   babel({
-    exclude: ['node_modules/**', '*.vue', '**.vue'],
-  })
+    exclude: ['node_modules/**', '*.vue', '**.vue']
+  }),
+  uglify({}, minify)
 ]
 
 const devRollup = {
@@ -56,6 +57,5 @@ const productionRollup = {
   format: 'es',
   plugins: productionPlugins
 }
-
 
 export default production ? [devRollup, productionRollup] : devRollup

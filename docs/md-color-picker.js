@@ -8206,7 +8206,7 @@ var _typeof$1 = typeof Symbol === "function" && typeof Symbol.iterator === "symb
   if (typeof document !== 'undefined') {
     var head = document.head || document.getElementsByTagName('head')[0],
         style = document.createElement('style'),
-        css = " .color[data-v-370b8428], .back-icon[data-v-370b8428] { -webkit-tap-highlight-color: transparent; -webkit-user-select: none; -ms-user-select: none; user-select: none; outline-style: none; -webkit-touch-callout: none; cursor: pointer; } .color[data-v-370b8428] { display: inline-block; border-radius: 100%; position: relative; } .back-icon[data-v-370b8428] { display: inline-block; text-align: center; float: left; } .outer-circle[data-v-370b8428] { position: absolute; border: 4px solid rgba(0, 0, 0, 0.0); border-radius: 100%; margin: 0; transition: all 0.45s; } .inner-circle[data-v-370b8428] { position: absolute; border: 4px solid rgba(0, 0, 0, 0.0); border-radius: 100%; margin: 7px; transition: all 0.45s; } .visible .inner-circle[data-v-370b8428] { border: 4px solid rgba(255, 255, 255, 1); transition: all 1.1s; } .visible .outer-circle[data-v-370b8428] { border: 4px solid rgba(0, 0, 0, 0.22); transition: all 1.1s; } .visible.is-light .inner-circle[data-v-370b8428] { border-color: #555555; transition: all 1.1s; } ";style.type = 'text/css';if (style.styleSheet) {
+        css = " .color-wrapper[data-v-370b8428], .color-wrapper *[data-v-370b8428] { box-sizing: content-box; text-align: left; } .color[data-v-370b8428], .back-icon[data-v-370b8428] { -webkit-tap-highlight-color: transparent; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -webkit-touch-callout: none; tap-highlight-color: transparent; user-select: none; outline-style: none; cursor: pointer; } .color[data-v-370b8428] { display: inline-block; border-radius: 100%; position: relative; } .back-icon[data-v-370b8428] { display: inline-block; text-align: center; float: left; } .outer-circle[data-v-370b8428] { position: absolute; border: 4px solid rgba(0, 0, 0, 0.0); border-radius: 100%; margin: 0; transition: all 0.45s; } .inner-circle[data-v-370b8428] { position: absolute; border: 4px solid rgba(0, 0, 0, 0.0); border-radius: 100%; margin: 7px; transition: all 0.45s; } .visible .inner-circle[data-v-370b8428] { border: 4px solid rgba(255, 255, 255, 1); transition: all 1.1s; } .visible .outer-circle[data-v-370b8428] { border: 4px solid rgba(0, 0, 0, 0.22); transition: all 1.1s; } .visible.is-light .inner-circle[data-v-370b8428] { border-color: #555555; transition: all 1.1s; } ";style.type = 'text/css';if (style.styleSheet) {
       style.styleSheet.cssText = css;
     } else {
       style.appendChild(document.createTextNode(css));
@@ -8347,12 +8347,7 @@ var Picker = { render: function render() {
     Object.keys(this.currentPalette).forEach(function (key) {
       var valueOrObject = _this2.currentPalette[key];
       var values = typeof valueOrObject === 'string' ? [valueOrObject] : valuesOfObj(valueOrObject);
-      for (var i in values) {
-        if (values[i] === _this2.value) {
-          _this2.selectedColorName = name;
-          return;
-        }
-      }
+      if (arrayIncludes(values, _this2.value)) _this2.selectedColorName = key;
     });
   }
 };

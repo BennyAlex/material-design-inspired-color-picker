@@ -49,17 +49,17 @@
   import accentMaterialPalette from '../palettes/material-palette-accent'
   import fullMaterialPalette from '../palettes/material-palette-full'
 
-  function arrayIncludes(arr, obj) {
-    let i = arr.length;
+  function arrayIncludes (arr, obj) {
+    let i = arr.length
     while (i--) {
       if (arr[i] === obj) {
-        return true;
+        return true
       }
     }
-    return false;
+    return false
   }
 
-  function valuesOfObj(obj) {
+  function valuesOfObj (obj) {
     const values = []
     Object.keys(obj).forEach(key => {
       values.push(obj[key])
@@ -100,7 +100,7 @@
       }
     },
     methods: {
-      getColorStyle(color) {
+      getColorStyle (color) {
         return {
           background: color.value,
           margin: this.colorMargin + 'px',
@@ -108,10 +108,10 @@
           width: this.colorSizePx
         }
       },
-      colorIsLight(color) {
+      colorIsLight (color) {
         return colorIsLight(color, 210)
       },
-      click(color) {
+      click (color) {
         if (this.useSpectrumPicker && typeof this.currentPalette[color.name] === 'object') {
           this.subPalette = color.name
           if (this.isTintOfSelected(color)) return
@@ -119,16 +119,16 @@
         }
         this.$emit('change', color.value)
       },
-      isTintOfSelected(color) {
+      isTintOfSelected (color) {
         return this.selectedColorName === color.name && arrayIncludes(valuesOfObj(this.currentPalette[this.selectedColorName]), this.value)
       },
-      getDefaultColor(colorObj) {
+      getDefaultColor (colorObj) {
         if (colorObj[this.defaultTint]) return colorObj[this.defaultTint]
         else return valuesOfObj(colorObj)[Math.round(Object.keys(colorObj).length / 2) - 1] // get the color in the middle
       }
     },
     computed: {
-      colors() {
+      colors () {
         const colors = []
         const palette = this.subPalette ? this.currentPalette[this.subPalette] : this.currentPalette
         const subName = this.subPalette ? this.subPalette + ' - ' : ''
@@ -142,7 +142,7 @@
         })
         return colors
       },
-      currentPalette() {
+      currentPalette () {
         if (!this.palette) return materialPalette
         else if (typeof this.palette === 'string') {
           const availablePalettes = {
@@ -155,43 +155,45 @@
         }
         else return this.palette
       },
-      wrapperSize() {
+      wrapperSize () {
         return ((this.colorSize * this.colorsPerRow) + (this.colorMargin * this.colorsPerRow * 2)) + 'px'
       },
-      colorSizePx() {
+      colorSizePx () {
         return this.colorSize + 'px'
       }
     },
-    data() {
+    data () {
       return {
         subPalette: undefined,
         selectedColorName: undefined
       }
     },
-    created() {
+    created () {
       if (!this.value || this.value.length !== 7 || this.selectedColorName) return // value must be in hex format, eg: #ffffff
       Object.keys(this.currentPalette).forEach(key => {
         let valueOrObject = this.currentPalette[key]
         const values = typeof valueOrObject === 'string' ? [valueOrObject] : valuesOfObj(valueOrObject)
-        for (let i in values) {
-          if (values[i] === this.value) {
-            this.selectedColorName = name
-            return
-          }
-        }
+        if (arrayIncludes(values, this.value)) this.selectedColorName = key
       })
     }
   }
 </script>
 
 <style scoped>
+  .color-wrapper, .color-wrapper * {
+    box-sizing: content-box;
+    text-align: left;
+  }
+
   .color, .back-icon {
     -webkit-tap-highlight-color: transparent;
     -webkit-user-select: none;
+    -moz-user-select: none;
     -ms-user-select: none;
+    -webkit-touch-callout: none;
+    tap-highlight-color: transparent;
     user-select: none;
     outline-style: none;
-    -webkit-touch-callout: none;
     cursor: pointer;
   }
 
