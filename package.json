@@ -1,7 +1,7 @@
 {
   "name": "material-design-inspired-color-picker",
-  "version": "1.5.0",
-  "description": "A color picker inspired by material design. Supports custom colors and palettes.",
+  "version": "1.6.0",
+  "description": "A color picker inspired by material design. It is highly customizable and supports custom colors and palettes.",
   "main": "dist/md-color-picker.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,9 +12,9 @@
   "license": "GPL-3.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/BennyAlex/material-design-inspired-color-picker.git",
-    "demo": "https://bennyalex.github.io/material-design-inspired-color-picker/"
+    "url": "https://github.com/BennyAlex/material-design-inspired-color-picker.git"
   },
+  "demo": "https://bennyalex.github.io/material-design-inspired-color-picker/",
   "devDependencies": {
     "babel-core": "^6.25.0",
     "babel-plugin-external-helpers": "^6.22.0",
