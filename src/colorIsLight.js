@@ -13,7 +13,7 @@ function toRgb(color) {
 
 const colorIsLight = (color, differenceRange) => {
   const rgb = toRgb(color) // https://www.w3.org/TR/AERT#color-contrast
-  return ((rgb.r * 320 + rgb.g * 590 + rgb.b * 110) / 1000) > (differenceRange || 125) // suggested by w3
+  return ((rgb.r * 320 + rgb.g * 560 + rgb.b * 110) / 1000) > (differenceRange || 125) // suggested by w3
 }
 
 export default colorIsLight

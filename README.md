@@ -1,21 +1,16 @@
 # material-design-inspired-color-picker
-> A javascript color picker inspired by material design
+> A customizable javascript color picker inspired by material design
 
 ### [DEMO](https://bennyalex.github.io/material-design-inspired-color-picker/ "DEMO")
 
 ## Features
 * built-in material color palette with shades and accent colors
+* highly customizable
 * support for custom color palettes
 * display main color first and by clicking on it show its shades or accent colors
 * easy to use
 * lightweight
 * can be used in plain javascript projects or with other js frameworks
-
-## Todo
-* add babel, but at the moment it looks like there is an error with rollup-babel plugin  :(
-* margin attribute
-* number of colors per row attribute
-* color-size attribute
 
 ## Installation
 > npm install material-design-inspired-color-picker --save
@@ -48,8 +43,9 @@ Following properties can be parsed into the picker:
 | :---: | :---:| :---:| :---: |
 | colorMargin / color-margin (in px) | number | 6 | 12 |
 | colorsPerRow / colors-per-row | number | 5 | 4 |
-| colorSize / color-size (in px) | number | 58 | 48 |
+| colorSize / color-size (in px) | number | 54 | 42 |
 | defaultTint / default-tint | number or string | 500 | '200' |
+| fixedMinHeight / fixed-min-height | bool | true | false |
 | palette | string or object | 'material' | 'material-full' |
 | useSpectrumPicker / use-spectrum-picker | bool | true | false |
 | value | string | none | #f1c5a9 |
@@ -59,6 +55,7 @@ Following properties can be parsed into the picker:
 * colorsPerRow : The number of colors per row
 * colorSize : The size of each color circle
 * defaultTint : this is the tint for each color wich will be shown at the beginning. Material colors default tint is 500. For custom palettes you can also use strings.
+*fixedMinHeight : If disabled, the picker will become less high, when the current subpalette has less colors than the mainpalette
 * palette : the palette with all colors. If it is a string, the picker will use a built in palette. Currently the following palettes are available:
 ````
 material : standard material colors 

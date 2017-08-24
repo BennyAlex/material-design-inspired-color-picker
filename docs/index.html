@@ -14,6 +14,7 @@
     body, html {
       height: 100%;
       line-height: 1;
+      background: #e7e7e7;
     }
 
     .no-text-highlight {
@@ -49,20 +50,42 @@
     }
 
     th, td {
-      padding: 0 13px !important;
-      height: 50px;
+      height: 51px;
+      padding: 6px 14px !important;
       vertical-align: middle !important;
       font-family: Verdana, sans-serif;
     }
 
     th {
-      background: #323232;
-      color: #ffffff;
-      height: 52px;
+      background: #373737;
+      color: #f7f7f7;
+      height: 53px;
+    }
+
+    .w3-table th:first-child, .w3-table td:first-child, .w3-table-all th:first-child, .w3-table-all td:first-child {
+      padding-left: 16px !important;
+    }
+
+    .w3-striped tbody tr:nth-child(even) {
+      background-color: #ffffff;
+    }
+
+    .w3-striped tbody tr:nth-child(odd) {
+      background-color: #f8f8f8;
+    }
+
+    input, .w3-input, .w3-select {
+      background: #ebebeb;
+      border-color: #4b4b4b;
     }
 
     .center {
       text-align: center;
+    }
+
+    .center > div, .center {
+      font-size: 0;
+      line-height: 1;
     }
 
     .center > div {
@@ -93,7 +116,7 @@
 </head>
 <body class="no-text-highlight">
 <div class="w3-bar defaultBarStyle w3-card"
-     style="line-height: 28px; padding-top: 11px; padding-bottom: 11px"
+     style="line-height: 36px"
      id="header">
   <b class="w3-bar-item w3-mobile" style="font-size: 19px; letter-spacing: 2px">
     MATERIAL DESIGN INSPIRED COLOR PICKER
@@ -101,134 +124,145 @@
 
   <div class="w3-bar-item w3-right w3-mobile">
     <a href="https://github.com/BennyAlex/material-design-inspired-color-picker" target="_blank"
-       style="text-decoration: none; padding: 5px 9px; border-radius: 50px; border-style: solid; border-width: 1px; border-color: inherit">
+       style="font-size: 14px; text-decoration: none; padding: 5px 9px; border-radius: 50px; border-style: solid; border-width: 1px; border-color: inherit">
       FORK ME ON GITHUB
     </a>
   </div>
 
 </div>
 
-<div class="w3-container center">
-  <div>
-    <div style="font-size: 24px; margin-top: 27px; margin-bottom: 22px">selected color: <b
-      class="text-highlight-all" style="font-family: 'Courier New', monospace; " id="selectedHex">#1e88e5</b></div>
+<div class="w3-container">
+  <div class="center">
+    <div>
+      <div style="font-size: 22px; margin-top: 27px; margin-bottom: 22px">selected color: <b
+        class="text-highlight-all" style="font-family: 'Courier New', monospace; " id="selectedHex">#1e88e5</b></div>
 
-    <md-color-picker id="picker" value="#1e88e5" palette="material-full"
-                     use-spectrum-picker="true"></md-color-picker>
+      <md-color-picker id="picker" value="#1e88e5" palette="material-full"></md-color-picker>
+    </div>
   </div>
 </div>
 
 <div style="margin-top: 20px" class="w3-container">
-  <div style="font-size: 20px"><b>Live Code Example:</b></div>
+  <div style="font-size: 17px"><b>Live Code Example:</b></div>
   <div style="margin-top: 8px !important; margin-bottom: 3px !important;" class="w3-code red text-highlight">
 
     <span class="blue2">&lt;</span><span class="brown">md-color-picker</span> <span id="code">color-margin<span
-    class="blue">="6"</span> colors-per-row<span class="blue">="5"</span> color-size<span class="blue">="58"</span>
-      default-tint<span class="blue">="500"</span> palette<span class="blue">="material-full"</span>
+    class="blue">="6"</span> colors-per-row<span class="blue">="5"</span> color-size<span class="blue">="54"</span>
+      default-tint<span class="blue">="500"</span> fixedMinHeight<span class="blue">="true"</span> palette<span
+      class="blue">="material-full"</span>
       use-spectrum-picker<span class="blue">="true"</span> value<span class="blue">="#1e88e5"</span></span><span
     class="blue2">&gt;&lt;</span><span class="brown">md-color-picker</span><span class="blue2">&gt;</span>
 
   </div>
 </div>
 
-<div class="w3-container" style="font-size: 20px;">
+<div class="w3-container" style="font-size: 16px;">
   <div class="w3-panel" style="background: #ffffcc; border-left: 6px solid #ffeb3b;">
     <p><b>Note:</b> In html the attributes are seperated by a hyphen instead of using camelCase in JavaScript</p>
   </div>
 </div>
 
-<div class="w3-container" style="margin-top: 4px; margin-bottom: 40px; font-size: 17px">
-  <table class="w3-table w3-striped w3-border">
-    <tr>
-      <th>Attribute (JS / HTML)</th>
-      <th>Value</th>
-      <th>Description</th>
-    </tr>
-
-    <tr>
-      <td>colorMargin / color-margin (in px)</td>
-      <td>
-        <input type="number" title="Color Distance"
-               onchange="changeProp(this.value, 'picker', 'colorMargin')"
-               class="w3-input" value="6" min="0" max="50" maxlength="2">
-      </td>
-      <td>The distance between the colors</td>
-    </tr>
-
-    <tr>
-      <td>colorsPerRow / colors-per-row</td>
-      <td>
-        <input type="number" title="Colors per Row"
-               onchange="changeProp(this.value, 'picker', 'colorsPerRow')"
-               class="w3-input" value="5" max="25" min="1">
-      </td>
-      <td>The number of colors per row</td>
-    </tr>
-
-    <tr>
-      <td>colorSize / color-size (in px)</td>
-      <td>
-        <input type="number" title="Color Size"
-               onchange="changeProp(this.value, 'picker', 'colorSize')" class="w3-input"
-               value="58" min="24" max="175">
-      </td>
-      <td>The size of each color circle</td>
-    </tr>
-    <tr>
-      <td>defaultTint / default-tint</td>
-      <td>
-        <select title="Tint" onchange="changeProp(this.value, 'picker', 'defaultTint')"
-                class="w3-select">
-          <option>100</option>
-          <option>200</option>
-          <option>300</option>
-          <option>400</option>
-          <option selected>500</option>
-          <option>600</option>
-          <option>700</option>
-          <option>800</option>
-          <option>900</option>
-          <option>a100</option>
-          <option>a200</option>
-          <option>a400</option>
-          <option>a700</option>
-        </select>
-      </td>
-      <td>This is the tint for each color wich will be shown at the beginning. Material colors default tint is 500. For
-        custom palettes you can also use strings
-      </td>
-    </tr>
-    <tr>
-      <td>palette</td>
-      <td>
-        <select title="Tint" onchange="changeProp(this.value, 'picker', 'palette')" class="w3-select">
-          <option>material</option>
-          <option selected>material-full</option>
-          <option>material-accent</option>
-        </select>
-      </td>
-      <td>The palette with all colors. If it is a string, the picker will use a built in palette instead of your own
-      </td>
-    </tr>
-    <tr>
-      <td>useSpectrumPicker / use-spectrum-picker</td>
-      <td>
-        <input type="checkbox" checked class="w3-check"
-               onclick="changeProp(this.checked, 'picker', 'useSpectrumPicker')">
-      </td>
-      <td>If false, the other color tints can not be selected, so only the color wich matches default tint is
-        selectable
-      </td>
-    </tr>
-    <tr>
-      <td>value (not recommended to change manually)</td>
-      <td>
-        -
-      </td>
-      <td>The color which is selected. Must be a hex number with a hashtag followed by 6 digits</td>
-    </tr>
-  </table>
-
+<div class="w3-container" style="margin-top: 4px; margin-bottom: 40px">
+  <div class="w3-responsive">
+    <table class="w3-table w3-striped w3-border w3-bordered" style="font-size: 15px">
+      <tr>
+        <th>Attribute (JS / HTML)</th>
+        <th>Value</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>colorMargin / color-margin (in px)</td>
+        <td>
+          <input type="number" title="Color Distance"
+                 onchange="changeProp(this.value, 'picker', 'colorMargin')"
+                 class="w3-input" value="6" min="0" max="50" maxlength="2">
+        </td>
+        <td>The distance between the colors</td>
+      </tr>
+      <tr>
+        <td>colorsPerRow / colors-per-row</td>
+        <td>
+          <input type="number" title="Colors per Row"
+                 onchange="changeProp(this.value, 'picker', 'colorsPerRow')"
+                 class="w3-input" value="5" max="25" min="1">
+        </td>
+        <td>The number of colors per row</td>
+      </tr>
+      <tr>
+        <td>colorSize / color-size (in px)</td>
+        <td>
+          <input type="number" title="Color Size"
+                 onchange="changeProp(this.value, 'picker', 'colorSize')" class="w3-input"
+                 value="54" min="24" max="175">
+        </td>
+        <td>The size of each color circle</td>
+      </tr>
+      <tr>
+        <td>defaultTint / default-tint</td>
+        <td>
+          <select title="Tint" onchange="changeProp(this.value, 'picker', 'defaultTint')"
+                  class="w3-select">
+            <option>100</option>
+            <option>200</option>
+            <option>300</option>
+            <option>400</option>
+            <option selected>500</option>
+            <option>600</option>
+            <option>700</option>
+            <option>800</option>
+            <option>900</option>
+            <option>a100</option>
+            <option>a200</option>
+            <option>a400</option>
+            <option>a700</option>
+          </select>
+        </td>
+        <td>This is the tint for each color wich will be shown at the beginning. Material colors default tint is 500.
+          For
+          custom palettes you can also use strings
+        </td>
+      </tr>
+      <tr>
+        <td>fixedMinHeight / fixed-min-height</td>
+        <td>
+          <input type="checkbox" checked class="w3-check"
+                 onclick="changeProp(this.checked, 'picker', 'fixedMinHeight')" style="position: inherit;">
+        </td>
+        <td>If disabled, the picker will become less high, when the current subpalette has less colors than the
+          mainpalette
+        </td>
+      </tr>
+      <tr>
+        <td>palette</td>
+        <td>
+          <select title="Tint" onchange="changeProp(this.value, 'picker', 'palette')" class="w3-select">
+            <option>material</option>
+            <option selected>material-full</option>
+            <option>material-accent</option>
+          </select>
+        </td>
+        <td>The palette with all colors. If it is a string, the picker will use a built in palette instead of your own
+        </td>
+      </tr>
+      <tr>
+        <td>useSpectrumPicker / use-spectrum-picker</td>
+        <td>
+          <input type="checkbox" checked class="w3-check"
+                 onclick="changeProp(this.checked, 'picker', 'useSpectrumPicker')" style="position: inherit;">
+        </td>
+        <td>If false, the other color tints can not be selected, so only the color wich matches default tint is
+          selectable
+        </td>
+      </tr>
+      <tr>
+        <td>value (not recommended to change manually)</td>
+        <td>
+          -
+        </td>
+        <td>The color which is selected. Must be a hex number with a hashtag followed by 6 digits</td>
+      </tr>
+    </table>
+  </div>
 </div>
 
 <div class="w3-container defaultBarStyle" id="footer">
@@ -247,9 +281,10 @@
     colorsPerRow: 1,
     colorSize: 2,
     defaultTint: 3,
-    palette: 4,
-    useSpectrumPicker: 5,
-    value: 6
+    fixedMinHeight: 4,
+    palette: 5,
+    useSpectrumPicker: 6,
+    value: 7
   }
   var bl = '#000000'
   var wh = '#ffffff'
@@ -258,7 +293,7 @@
     var color = event.detail[0]
     console.log('Selected Color:', color)
     picker.value = color
-    if (colorIsLight(color, 150)) {
+    if (colorIsLight(color, 160)) {
       header.style.color = bl
       footer.style.color = bl
     }

@@ -1,5 +1,5 @@
 <template>
-  <div class="color-wrapper" :style="{width: wrapperSize}">
+  <div class="color-wrapper" :style="fixedMinHeight ? {width: wrapperWidth, minHeight: wrapperMinHeight} : {width: wrapperWidth}">
     <div
       v-show="subPalette !== undefined"
       @click="subPalette = undefined"
@@ -80,7 +80,7 @@
       },
       colorSize: {
         type: Number,
-        default: 58
+        default: 54
       },
       colorsPerRow: {
         type: Number,
@@ -93,6 +93,10 @@
       defaultTint: {
         type: [Number, String],
         default: 500
+      },
+      fixedMinHeight: {
+        type: Boolean,
+        default: true
       },
       useSpectrumPicker: {
         type: Boolean,
@@ -155,7 +159,11 @@
         }
         else return this.palette
       },
-      wrapperSize () {
+      wrapperMinHeight () {
+        const numberOfRows = Math.ceil(Object.keys(this.currentPalette).length / this.colorsPerRow)
+        return ((this.colorSize * numberOfRows) + (this.colorMargin * numberOfRows * 2)) + 'px'
+      },
+      wrapperWidth () {
         return ((this.colorSize * this.colorsPerRow) + (this.colorMargin * this.colorsPerRow * 2)) + 'px'
       },
       colorSizePx () {
@@ -180,9 +188,16 @@
 </script>
 
 <style scoped>
+  .color-wrapper {
+    margin: 0;
+    padding: 0;
+  }
+
   .color-wrapper, .color-wrapper * {
     box-sizing: content-box;
     text-align: left;
+    line-height: 1;
+    font-size: 0;
   }
 
   .color, .back-icon {
@@ -207,6 +222,25 @@
     display: inline-block;
     text-align: center;
     float: left;
+    border-radius: 100%;
+    position: relative;
+  }
+
+  .back-icon:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+  }
+
+  .back-icon:hover:before {
+    background-color: black;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+    filter: alpha(opacity=20);
+    opacity: 0.2;
   }
 
   .outer-circle {

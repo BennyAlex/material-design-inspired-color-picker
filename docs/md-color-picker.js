@@ -7839,7 +7839,7 @@ function toRgb(color) {
 
 var colorIsLight = function colorIsLight(color, differenceRange) {
   var rgb = toRgb(color); // https://www.w3.org/TR/AERT#color-contrast
-  return (rgb.r * 320 + rgb.g * 590 + rgb.b * 110) / 1000 > (differenceRange || 125); // suggested by w3
+  return (rgb.r * 320 + rgb.g * 560 + rgb.b * 110) / 1000 > (differenceRange || 125); // suggested by w3
 };
 
 var materialPalette = {
@@ -8206,7 +8206,7 @@ var _typeof$1 = typeof Symbol === "function" && typeof Symbol.iterator === "symb
   if (typeof document !== 'undefined') {
     var head = document.head || document.getElementsByTagName('head')[0],
         style = document.createElement('style'),
-        css = " .color-wrapper[data-v-370b8428], .color-wrapper *[data-v-370b8428] { box-sizing: content-box; text-align: left; } .color[data-v-370b8428], .back-icon[data-v-370b8428] { -webkit-tap-highlight-color: transparent; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -webkit-touch-callout: none; tap-highlight-color: transparent; user-select: none; outline-style: none; cursor: pointer; } .color[data-v-370b8428] { display: inline-block; border-radius: 100%; position: relative; } .back-icon[data-v-370b8428] { display: inline-block; text-align: center; float: left; } .outer-circle[data-v-370b8428] { position: absolute; border: 4px solid rgba(0, 0, 0, 0.0); border-radius: 100%; margin: 0; transition: all 0.45s; } .inner-circle[data-v-370b8428] { position: absolute; border: 4px solid rgba(0, 0, 0, 0.0); border-radius: 100%; margin: 7px; transition: all 0.45s; } .visible .inner-circle[data-v-370b8428] { border: 4px solid rgba(255, 255, 255, 1); transition: all 1.1s; } .visible .outer-circle[data-v-370b8428] { border: 4px solid rgba(0, 0, 0, 0.22); transition: all 1.1s; } .visible.is-light .inner-circle[data-v-370b8428] { border-color: #555555; transition: all 1.1s; } ";style.type = 'text/css';if (style.styleSheet) {
+        css = " .color-wrapper[data-v-370b8428] { margin: 0; padding: 0; } .color-wrapper[data-v-370b8428], .color-wrapper *[data-v-370b8428] { box-sizing: content-box; text-align: left; line-height: 1; font-size: 0; } .color[data-v-370b8428], .back-icon[data-v-370b8428] { -webkit-tap-highlight-color: transparent; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -webkit-touch-callout: none; tap-highlight-color: transparent; user-select: none; outline-style: none; cursor: pointer; } .color[data-v-370b8428] { display: inline-block; border-radius: 100%; position: relative; } .back-icon[data-v-370b8428] { display: inline-block; text-align: center; float: left; border-radius: 100%; position: relative; } .back-icon[data-v-370b8428]:before { content: \"\"; position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 100%; } .back-icon[data-v-370b8428]:hover:before { background-color: black; -ms-filter: \"progid:DXImageTransform.Microsoft.Alpha(Opacity=20)\"; filter: alpha(opacity=20); opacity: 0.2; } .outer-circle[data-v-370b8428] { position: absolute; border: 4px solid rgba(0, 0, 0, 0.0); border-radius: 100%; margin: 0; transition: all 0.45s; } .inner-circle[data-v-370b8428] { position: absolute; border: 4px solid rgba(0, 0, 0, 0.0); border-radius: 100%; margin: 7px; transition: all 0.45s; } .visible .inner-circle[data-v-370b8428] { border: 4px solid rgba(255, 255, 255, 1); transition: all 1.1s; } .visible .outer-circle[data-v-370b8428] { border: 4px solid rgba(0, 0, 0, 0.22); transition: all 1.1s; } .visible.is-light .inner-circle[data-v-370b8428] { border-color: #555555; transition: all 1.1s; } ";style.type = 'text/css';if (style.styleSheet) {
       style.styleSheet.cssText = css;
     } else {
       style.appendChild(document.createTextNode(css));
@@ -8233,7 +8233,7 @@ function valuesOfObj(obj) {
 }
 
 var Picker = { render: function render() {
-    var _vm = this;var _h = _vm.$createElement;var _c = _vm._self._c || _h;return _c('div', { staticClass: "color-wrapper", style: { width: _vm.wrapperSize } }, [_c('div', { directives: [{ name: "show", rawName: "v-show", value: _vm.subPalette !== undefined, expression: "subPalette !== undefined" }], staticClass: "back-icon", style: { margin: _vm.colorMargin + 'px', height: _vm.colorSizePx, width: _vm.colorSizePx }, on: { "click": function click($event) {
+    var _vm = this;var _h = _vm.$createElement;var _c = _vm._self._c || _h;return _c('div', { staticClass: "color-wrapper", style: _vm.fixedMinHeight ? { width: _vm.wrapperWidth, minHeight: _vm.wrapperMinHeight } : { width: _vm.wrapperWidth } }, [_c('div', { directives: [{ name: "show", rawName: "v-show", value: _vm.subPalette !== undefined, expression: "subPalette !== undefined" }], staticClass: "back-icon", style: { margin: _vm.colorMargin + 'px', height: _vm.colorSizePx, width: _vm.colorSizePx }, on: { "click": function click($event) {
           _vm.subPalette = undefined;
         } } }, [_c('svg', { attrs: { "fill": "#000000", "height": _vm.colorSize, "viewBox": "0 0 24 24", "width": _vm.colorSize / 2, "xmlns": "http://www.w3.org/2000/svg" } }, [_c('path', { attrs: { "d": "M0 0h24v24H0z", "fill": "none" } }), _c('path', { attrs: { "d": "M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" } })])]), _vm._l(_vm.colors, function (color) {
       return _c('div', { key: color.name, staticClass: "color", style: _vm.getColorStyle(color), attrs: { "title": color.name }, on: { "click": function click($event) {
@@ -8253,7 +8253,7 @@ var Picker = { render: function render() {
     },
     colorSize: {
       type: Number,
-      default: 58
+      default: 54
     },
     colorsPerRow: {
       type: Number,
@@ -8266,6 +8266,10 @@ var Picker = { render: function render() {
     defaultTint: {
       type: [Number, String],
       default: 500
+    },
+    fixedMinHeight: {
+      type: Boolean,
+      default: true
     },
     useSpectrumPicker: {
       type: Boolean,
@@ -8327,7 +8331,11 @@ var Picker = { render: function render() {
         return availablePalettes[this.palette];
       } else return this.palette;
     },
-    wrapperSize: function wrapperSize() {
+    wrapperMinHeight: function wrapperMinHeight() {
+      var numberOfRows = Math.ceil(Object.keys(this.currentPalette).length / this.colorsPerRow);
+      return this.colorSize * numberOfRows + this.colorMargin * numberOfRows * 2 + 'px';
+    },
+    wrapperWidth: function wrapperWidth() {
       return this.colorSize * this.colorsPerRow + this.colorMargin * this.colorsPerRow * 2 + 'px';
     },
     colorSizePx: function colorSizePx() {
