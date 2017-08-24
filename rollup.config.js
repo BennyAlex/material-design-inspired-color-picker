@@ -47,8 +47,9 @@ const productionPlugins = [
 const devRollup = {
   input: 'src/main.js',
   output: {
+    name: "colorPicker",
     file: 'docs/md-color-picker.js',
-    format: 'es'
+    format: 'iife'
   },
   strict: true,
   plugins: devPlugins
@@ -57,8 +58,9 @@ const devRollup = {
 const productionRollup = {
   input: 'src/main.js',
   output: {
+    name: "colorPicker",
     file: 'dist/md-color-picker.js',
-    format: 'es'
+    format: 'iife'
   },
   strict: true,
   plugins: productionPlugins

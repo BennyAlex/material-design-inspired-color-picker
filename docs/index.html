@@ -293,7 +293,7 @@
     var color = event.detail[0]
     console.log('Selected Color:', color)
     picker.value = color
-    if (colorIsLight(color, 160)) {
+    if (colorPicker.colorIsLight(color, 160)) {
       header.style.color = bl
       footer.style.color = bl
     }

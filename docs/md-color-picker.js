@@ -1,3 +1,6 @@
+var colorPicker = (function () {
+'use strict';
+
 /*!
  * Vue.js v2.4.2
  * (c) 2014-2017 Evan You
@@ -7822,24 +7825,19 @@ if (typeof window !== 'undefined' && window.Vue) {
   }
 }
 
-function toRgb(color) {
+var colorIsLight = function colorIsLight(color, differenceRange) {
   if (color[0] === '#') {
     color = color.substr(1);
   }
   console.assert(color.length === 6, 'color must have a length of 6 hex numbers');
-  var r = void 0,
-      g = void 0,
-      b = void 0;
-  var rgb = parseInt(color, 16); // convert rrggbb to decimal
-  r = rgb >> 16 & 0xff; // extract red
-  g = rgb >> 8 & 0xff; // extract green
-  b = rgb >> 0 & 0xff; // extract blue
-  return { r: r, g: g, b: b };
-}
+  var red = parseInt(color.substr(0, 2), 16);
+  var green = parseInt(color.substr(2, 2), 16);
+  var blue = parseInt(color.substr(4, 2), 16);
+  return (red * 320 + green * 560 + blue * 110) / 1000 > (differenceRange || 125); // suggested by w3
+};
 
-var colorIsLight = function colorIsLight(color, differenceRange) {
-  var rgb = toRgb(color); // https://www.w3.org/TR/AERT#color-contrast
-  return (rgb.r * 320 + rgb.g * 560 + rgb.b * 110) / 1000 > (differenceRange || 125); // suggested by w3
+var colorIsDark = function colorIsDark(color, differenceRange) {
+  return !colorIsLight(color, differenceRange);
 };
 
 var materialPalette = {
@@ -8202,11 +8200,27 @@ var _typeof$1 = typeof Symbol === "function" && typeof Symbol.iterator === "symb
   return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
 };
 
+
+
+
+
+
+
+
+
+
+
+var classCallCheck = function (instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+};
+
 (function () {
   if (typeof document !== 'undefined') {
     var head = document.head || document.getElementsByTagName('head')[0],
         style = document.createElement('style'),
-        css = " .color-wrapper[data-v-370b8428] { margin: 0; padding: 0; } .color-wrapper[data-v-370b8428], .color-wrapper *[data-v-370b8428] { box-sizing: content-box; text-align: left; line-height: 1; font-size: 0; } .color[data-v-370b8428], .back-icon[data-v-370b8428] { -webkit-tap-highlight-color: transparent; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -webkit-touch-callout: none; tap-highlight-color: transparent; user-select: none; outline-style: none; cursor: pointer; } .color[data-v-370b8428] { display: inline-block; border-radius: 100%; position: relative; } .back-icon[data-v-370b8428] { display: inline-block; text-align: center; float: left; border-radius: 100%; position: relative; } .back-icon[data-v-370b8428]:before { content: \"\"; position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 100%; } .back-icon[data-v-370b8428]:hover:before { background-color: black; -ms-filter: \"progid:DXImageTransform.Microsoft.Alpha(Opacity=20)\"; filter: alpha(opacity=20); opacity: 0.2; } .outer-circle[data-v-370b8428] { position: absolute; border: 4px solid rgba(0, 0, 0, 0.0); border-radius: 100%; margin: 0; transition: all 0.45s; } .inner-circle[data-v-370b8428] { position: absolute; border: 4px solid rgba(0, 0, 0, 0.0); border-radius: 100%; margin: 7px; transition: all 0.45s; } .visible .inner-circle[data-v-370b8428] { border: 4px solid rgba(255, 255, 255, 1); transition: all 1.1s; } .visible .outer-circle[data-v-370b8428] { border: 4px solid rgba(0, 0, 0, 0.22); transition: all 1.1s; } .visible.is-light .inner-circle[data-v-370b8428] { border-color: #555555; transition: all 1.1s; } ";style.type = 'text/css';if (style.styleSheet) {
+        css = " .color-wrapper[data-v-370b8428] { margin: 0; padding: 0; } .color-wrapper[data-v-370b8428], .color-wrapper *[data-v-370b8428] { box-sizing: content-box; text-align: left; line-height: 1; font-size: 0; } .color[data-v-370b8428], .back-icon[data-v-370b8428] { -webkit-tap-highlight-color: transparent; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -webkit-touch-callout: none; tap-highlight-color: transparent; user-select: none; outline-style: none; cursor: pointer; } .color[data-v-370b8428] { display: inline-block; border-radius: 100%; position: relative; } .back-icon[data-v-370b8428] { display: inline-block; text-align: center; float: left; border-radius: 100%; position: relative; } .back-icon[data-v-370b8428]:hover { background: rgba(0, 0, 0, 0.19); } .outer-circle[data-v-370b8428] { position: absolute; border: 4px solid rgba(0, 0, 0, 0.0); border-radius: 100%; margin: 0; transition: all 0.45s; } .inner-circle[data-v-370b8428] { position: absolute; border: 4px solid rgba(0, 0, 0, 0.0); border-radius: 100%; margin: 7px; transition: all 0.45s; } .visible .inner-circle[data-v-370b8428] { border: 4px solid rgba(255, 255, 255, 1); transition: all 1s; } .visible .outer-circle[data-v-370b8428] { border: 4px solid rgba(0, 0, 0, 0.17); transition: all 1s; } .visible.is-light .inner-circle[data-v-370b8428] { border-color: #555555; transition: all 1s; } ";style.type = 'text/css';if (style.styleSheet) {
       style.styleSheet.cssText = css;
     } else {
       style.appendChild(document.createTextNode(css));
@@ -8217,9 +8231,7 @@ var _typeof$1 = typeof Symbol === "function" && typeof Symbol.iterator === "symb
 function arrayIncludes(arr, obj) {
   var i = arr.length;
   while (i--) {
-    if (arr[i] === obj) {
-      return true;
-    }
+    if (arr[i] === obj) return true;
   }
   return false;
 }
@@ -8365,3 +8377,19 @@ Vue$3.use(install);
 
 // import and register your component
 Vue$3.customElement('md-color-picker', Picker);
+
+// this is the color picker class which can be accessed from outside
+
+var ColorPicker = function ColorPicker() {
+  classCallCheck(this, ColorPicker);
+};
+
+ColorPicker.materialPalette = materialPalette;
+ColorPicker.accentMaterialPalette = accentMaterialPalette;
+ColorPicker.fullMaterialPalette = fullMaterialPalette;
+ColorPicker.colorIsLight = colorIsLight;
+ColorPicker.colorIsDark = colorIsDark;
+
+return ColorPicker;
+
+}());

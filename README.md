@@ -17,13 +17,13 @@
 
 ## Usage
 First include the script in your app. There are two ways to do it.
-1. Recommended if you are using es6:
-````javascript
-import 'material-design-inspired-color-picker'
-````
-2. Compatible with plain javascript
+1. On a plain website or if you don't use es6:
 ````html
 <script src="path/to/md-color-picker.js"></script>
+````
+2. If you are using es6:
+````javascript
+import 'material-design-inspired-color-picker'
 ````
 Then, you can use it like a custom-element tag:
 ````html

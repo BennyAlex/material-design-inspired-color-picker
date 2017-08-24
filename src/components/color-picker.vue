@@ -1,5 +1,6 @@
 <template>
-  <div class="color-wrapper" :style="fixedMinHeight ? {width: wrapperWidth, minHeight: wrapperMinHeight} : {width: wrapperWidth}">
+  <div class="color-wrapper"
+       :style="fixedMinHeight ? {width: wrapperWidth, minHeight: wrapperMinHeight} : {width: wrapperWidth}">
     <div
       v-show="subPalette !== undefined"
       @click="subPalette = undefined"
@@ -44,7 +45,7 @@
 </template>
 
 <script>
-  import colorIsLight from '../colorIsLight'
+  import { colorIsLight, colorIsDark } from '../color-brightness'
   import materialPalette from '../palettes/material-palette'
   import accentMaterialPalette from '../palettes/material-palette-accent'
   import fullMaterialPalette from '../palettes/material-palette-full'
@@ -52,9 +53,7 @@
   function arrayIncludes (arr, obj) {
     let i = arr.length
     while (i--) {
-      if (arr[i] === obj) {
-        return true
-      }
+      if (arr[i] === obj) return true
     }
     return false
   }
@@ -226,21 +225,8 @@
     position: relative;
   }
 
-  .back-icon:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 100%;
-  }
-
-  .back-icon:hover:before {
-    background-color: black;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
-    filter: alpha(opacity=20);
-    opacity: 0.2;
+  .back-icon:hover {
+    background: rgba(0, 0, 0, 0.19);
   }
 
   .outer-circle {
@@ -261,16 +247,16 @@
 
   .visible .inner-circle {
     border: 4px solid rgba(255, 255, 255, 1);
-    transition: all 1.1s;
+    transition: all 1s;
   }
 
   .visible .outer-circle {
-    border: 4px solid rgba(0, 0, 0, 0.22);
-    transition: all 1.1s;
+    border: 4px solid rgba(0, 0, 0, 0.17);
+    transition: all 1s;
   }
 
   .visible.is-light .inner-circle {
     border-color: #555555;
-    transition: all 1.1s;
+    transition: all 1s;
   }
 </style>
