@@ -1,6 +1,9 @@
 # material-design-inspired-color-picker
 > A customizable javascript color picker inspired by material design
 
+### Screenshot
+![Screenshot](https://github.com/BennyAlex/material-design-inspired-color-picker/tree/master/docs/screenshot.png)
+
 ### [DEMO](https://bennyalex.github.io/material-design-inspired-color-picker/ "DEMO")
 
 ## Features
@@ -58,8 +61,8 @@ Following properties can be parsed into the picker:
 *fixedMinHeight : If disabled, the picker will become less high, when the current subpalette has less colors than the mainpalette
 * palette : the palette with all colors. If it is a string, the picker will use a built in palette. Currently the following palettes are available:
 ````
-material : standard material colors 
-material-full : the material colors including the accent colors 
+material : standard material colors
+material-full : the material colors including the accent colors
 material-accent : only the accent material colors
 ````
 * useSpectrumPicker : if false, the other color tints can not be selected, so only the color wich matches default tint is selectable.
