@@ -2,7 +2,7 @@
 > A customizable javascript color picker inspired by material design
 
 ### Screenshot
-![Screenshot](https://github.com/BennyAlex/material-design-inspired-color-picker/tree/master/docs/screenshot.png)
+![Screenshot](https://raw.githubusercontent.com/BennyAlex/material-design-inspired-color-picker/master/docs/screenshot.png)
 
 ### [DEMO](https://bennyalex.github.io/material-design-inspired-color-picker/ "DEMO")
 
