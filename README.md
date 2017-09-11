@@ -1,10 +1,14 @@
-# material-design-inspired-color-picker
-> A customizable javascript color picker inspired by material design
+<div align="center" style="text-align: center; margin: 0 auto;">
+<h1 style="letter-spacing: 2px; font-weight: 500">material-design-inspired-color-picker</h1>
+<h4>A customizable javascript color picker inspired by material design</h4>
+[![forthebadge](http://forthebadge.com/images/badges/made-with-vue.svg)](http://forthebadge.com)
+[![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)
 
-### Screenshot
 ![Screenshot](https://raw.githubusercontent.com/BennyAlex/material-design-inspired-color-picker/master/docs/screenshot.png)
 
-### [DEMO](https://bennyalex.github.io/material-design-inspired-color-picker/ "DEMO")
+</div>
+
+## [DEMO](https://bennyalex.github.io/material-design-inspired-color-picker/ "DEMO")
 
 ## Features
 * built-in material color palette with shades and accent colors
@@ -38,7 +42,7 @@ A custom elements polyfill is included, so it will work in even in browsers wich
 ## Api
 The picker let you pass in some options and attributes so you can customize it.
 
-Note: In html the attributes are seperated by a hyphen instead of using camelCase in JavaScript.
+**Note:** In html the attributes are seperated by a hyphen instead of using camelCase in JavaScript.
 
 Following properties can be parsed into the picker:
 
