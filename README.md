@@ -1,7 +1,9 @@
 <div align="center" style="text-align: center; margin: 0 auto;">
 <h1 style="letter-spacing: 2px; font-weight: 500">material-design-inspired-color-picker</h1>
 <h4>A customizable javascript color picker inspired by material design</h4>
+
 [![forthebadge](http://forthebadge.com/images/badges/made-with-vue.svg)](http://forthebadge.com)
+
 [![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)
 
 ![Screenshot](https://raw.githubusercontent.com/BennyAlex/material-design-inspired-color-picker/master/docs/screenshot.png)
