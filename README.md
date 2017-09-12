@@ -2,12 +2,11 @@
 <h1 style="letter-spacing: 2px; font-weight: 500">material-design-inspired-color-picker</h1>
 <h4>A customizable javascript color picker inspired by material design</h4>
 
-[![forthebadge](http://forthebadge.com/images/badges/made-with-vue.svg)](http://forthebadge.com)
-
 [![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)
 
-![Screenshot](https://raw.githubusercontent.com/BennyAlex/material-design-inspired-color-picker/master/docs/screenshot.png)
+[![forthebadge](http://forthebadge.com/images/badges/made-with-vue.svg)](http://forthebadge.com)
 
+![Screenshot](https://raw.githubusercontent.com/BennyAlex/material-design-inspired-color-picker/master/docs/screenshot.png)
 </div>
 
 ## [DEMO](https://bennyalex.github.io/material-design-inspired-color-picker/ "DEMO")
@@ -22,23 +21,29 @@
 * can be used in plain javascript projects or with other js frameworks
 
 ## Installation
+With **npm**:
 > npm install material-design-inspired-color-picker --save
 
+As **script**:
+> Download the md-color-picker.js file from [here](https://raw.githubusercontent.com/BennyAlex/material-design-inspired-color-picker/master/dist/md-color-picker.js "md-color-picker.js")
+
 ## Usage
-First include the script in your app. There are two ways to do it.
-1. On a plain website or if you don't use es6:
-````html
-<script src="path/to/md-color-picker.js"></script>
-````
-2. If you are using es6:
+Include the script in your app.
+
+If you installed the color picker with npm:
 ````javascript
 import 'material-design-inspired-color-picker'
 ````
-Then, you can use it like a custom-element tag:
+
+If you just downloaded the md-color-picker.js file:
+````html
+<script src="path/to/md-color-picker.js"></script>
+````
+
+Then, you can use it like a html tag:
 ````html
 <md-color-picker></md-color-picker>
 ````
-
 A custom elements polyfill is included, so it will work in even in browsers wich do not support the custom-elements specification.
 
 ## Api
