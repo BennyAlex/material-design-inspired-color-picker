@@ -192,8 +192,8 @@
         <td>colorSize / color-size (in px)</td>
         <td>
           <input type="number" title="Color Size"
-                 onchange="changeProp(this.value, 'picker', 'colorSize')" class="w3-input"
-                 value="54" min="24" max="175">
+                 onchange="changeProp(this.value, 'picker', 'colorSize', 24, 175)" class="w3-input"
+                 value="54" min="24" max="175" step="1">
         </td>
         <td>The size of each color circle</td>
       </tr>
@@ -315,10 +315,20 @@
     picker.attachEvent('change', listenerEvent)
   }
 
-  function changeProp (value, targetID, targetProp) {
+  function changeProp (event, value, targetID, targetProp, min, max) {
     var tar = document.getElementById(targetID)
-    tar[targetProp] = value
-    code[codePropMapping[targetProp]].innerHTML = '="' + value + '"'
+    if (value < min) {
+      alert('The value is to small. The smallest possible value is: ' + min)
+      event.taget.value = min
+    }
+    else if (value > max) {
+      alert('The value is to big. The biggest possible value is: ' + max)
+      event.taget.value = max
+    }
+    else {
+      tar[targetProp] = value
+      code[codePropMapping[targetProp]].innerHTML = '="' + value + '"'
+    }
   }
 </script>
 </body>
