@@ -1,6 +1,6 @@
 {
   "name": "material-design-inspired-color-picker",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "A color picker inspired by material design. It is highly customizable and supports custom colors and palettes.",
   "main": "dist/md-color-picker.js",
   "scripts": {
