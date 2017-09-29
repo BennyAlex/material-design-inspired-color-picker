@@ -162,6 +162,12 @@
   </div>
 </div>
 
+<div class="w3-container" style="font-size: 16px; display: none" id="error">
+  <div class="w3-panel" style="background: #ffdddd; border-left: 6px solid #f44336; margin-top: 0;">
+    <p><b>Warning:</b> <span id="errorMsg"></span></p>
+  </div>
+</div>
+
 <div class="w3-container" style="margin-top: 4px; margin-bottom: 40px">
   <div class="w3-responsive">
     <table class="w3-table w3-striped w3-border w3-bordered" style="font-size: 15px">
@@ -174,7 +180,7 @@
         <td>colorMargin / color-margin (in px)</td>
         <td>
           <input type="number" title="Color Distance"
-                 onchange="changeProp(this.value, 'picker', 'colorMargin')"
+                 onchange="changeProp(this, this.value, 'picker', 'colorMargin', 0, 50)"
                  class="w3-input" value="6" min="0" max="50" maxlength="2">
         </td>
         <td>The distance between the colors</td>
@@ -183,7 +189,7 @@
         <td>colorsPerRow / colors-per-row</td>
         <td>
           <input type="number" title="Colors per Row"
-                 onchange="changeProp(this.value, 'picker', 'colorsPerRow')"
+                 onchange="changeProp(this, this.value, 'picker', 'colorsPerRow', 1, 25)"
                  class="w3-input" value="5" max="25" min="1">
         </td>
         <td>The number of colors per row</td>
@@ -192,7 +198,7 @@
         <td>colorSize / color-size (in px)</td>
         <td>
           <input type="number" title="Color Size"
-                 onchange="changeProp(this.value, 'picker', 'colorSize', 24, 175)" class="w3-input"
+                 onchange="changeProp(this, this.value, 'picker', 'colorSize', 24, 175)" class="w3-input"
                  value="54" min="24" max="175" step="1">
         </td>
         <td>The size of each color circle</td>
@@ -200,7 +206,7 @@
       <tr>
         <td>defaultTint / default-tint</td>
         <td>
-          <select title="Tint" onchange="changeProp(this.value, 'picker', 'defaultTint')"
+          <select title="Tint" onchange="changeProp(this, this.value, 'picker', 'defaultTint')"
                   class="w3-select">
             <option>50</option>
             <option>100</option>
@@ -227,7 +233,7 @@
         <td>fixedMinHeight / fixed-min-height</td>
         <td>
           <input type="checkbox" checked class="w3-check"
-                 onclick="changeProp(this.checked, 'picker', 'fixedMinHeight')" style="position: inherit;">
+                 onclick="changeProp(this, this.checked, 'picker', 'fixedMinHeight')" style="position: inherit;">
         </td>
         <td>If disabled, the picker will become less high, when the current subpalette has less colors than the
           mainpalette
@@ -236,7 +242,7 @@
       <tr>
         <td>palette</td>
         <td>
-          <select title="Tint" onchange="changeProp(this.value, 'picker', 'palette')" class="w3-select">
+          <select title="Tint" onchange="changeProp(this, this.value, 'picker', 'palette')" class="w3-select">
             <option>material</option>
             <option selected>material-full</option>
             <option>material-accent</option>
@@ -249,7 +255,7 @@
         <td>useSpectrumPicker / use-spectrum-picker</td>
         <td>
           <input type="checkbox" checked class="w3-check"
-                 onclick="changeProp(this.checked, 'picker', 'useSpectrumPicker')" style="position: inherit;">
+                 onclick="changeProp(this, this.checked, 'picker', 'useSpectrumPicker')" style="position: inherit;">
         </td>
         <td>If false, the other color tints can not be selected, so only the color wich matches default tint is
           selectable
@@ -276,6 +282,8 @@
   var header = document.getElementById('header')
   var footer = document.getElementById('footer')
   var code = document.getElementById('code').children
+  var error = document.getElementById('error')
+  var errMsg = document.getElementById('errorMsg')
 
   codePropMapping = {
     colorMargin: 0,
@@ -315,17 +323,21 @@
     picker.attachEvent('change', listenerEvent)
   }
 
-  function changeProp (event, value, targetID, targetProp, min, max) {
+  function changeProp (sourceElm, value, targetID, targetProp, min, max) {
     var tar = document.getElementById(targetID)
+    
     if (value < min) {
-      alert('The value is to small. The smallest possible value is: ' + min)
-      event.taget.value = min
+      errMsg.innerHTML = 'The value is to small. The smallest possible value is: <b>' + min + '</b>'
+      error.style.display = 'block'
+      sourceElm.value = min
     }
     else if (value > max) {
-      alert('The value is to big. The biggest possible value is: ' + max)
-      event.taget.value = max
+      errMsg.innerHTML = 'The value is to big. The biggest possible value is: <b>' + max + '</b>'
+      error.style.display = 'block'
+      sourceElm.value = max
     }
     else {
+      error.style.display = 'none'
       tar[targetProp] = value
       code[codePropMapping[targetProp]].innerHTML = '="' + value + '"'
     }
