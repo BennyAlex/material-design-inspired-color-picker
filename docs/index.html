@@ -29,7 +29,7 @@
       cursor: default;
     }
 
-    .text-highlight, .text-highlight-all, td {
+    .text-highlight, td {
       -webkit-user-select: text;
       -moz-user-select: text;
       -ms-user-select: text;
@@ -40,13 +40,6 @@
       tap-highlight-color: initial;
       outline-style: initial;
       cursor: text;
-    }
-
-    .text-highlight-all, td {
-      -webkit-user-select: all !important;
-      -moz-user-select: all !important;
-      -ms-user-select: all !important;
-      user-select: all !important;
     }
 
     th, td {
@@ -135,7 +128,8 @@
   <div class="center">
     <div>
       <div style="font-size: 22px; margin-top: 27px; margin-bottom: 22px">selected color: <b
-        class="text-highlight-all" style="font-family: 'Courier New', monospace; " id="selectedHex">#1e88e5</b></div>
+        class="text-highlight" style="font-family: 'Courier New', monospace; " id="selectedHex">#1e88e5</b>
+      </div>
 
       <md-color-picker id="picker" value="#1e88e5" palette="material-full"></md-color-picker>
     </div>
@@ -147,7 +141,8 @@
   <div style="margin-top: 8px !important; margin-bottom: 3px !important;" class="w3-code red text-highlight">
 
     <span class="blue2">&lt;</span><span class="brown">md-color-picker</span> <span id="code">color-margin<span
-    class="blue">="6"</span> colors-per-row<span class="blue">="5"</span> color-size<span class="blue">="54"</span>
+    class="blue">="6"</span> colors-per-row<span class="blue">="5"</span> color-size<span
+    class="blue">="54"</span>
       default-tint<span class="blue">="500"</span> fixedMinHeight<span class="blue">="true"</span> palette<span
       class="blue">="material-full"</span>
       use-spectrum-picker<span class="blue">="true"</span> value<span class="blue">="#1e88e5"</span></span><span
@@ -157,13 +152,13 @@
 </div>
 
 <div class="w3-container" style="font-size: 16px;">
-  <div class="w3-panel" style="background: #ffffcc; border-left: 6px solid #ffeb3b;">
+  <div class="w3-panel" style="background: #ffffcc; border-left: 4px solid #ffd216;">
     <p><b>Note:</b> In html the attributes are seperated by a hyphen instead of using camelCase in JavaScript</p>
   </div>
 </div>
 
 <div class="w3-container" style="font-size: 16px; display: none" id="error">
-  <div class="w3-panel" style="background: #ffdddd; border-left: 6px solid #f44336; margin-top: 0;">
+  <div class="w3-panel" style="background: #ffdddd; border-left: 4px solid #f44336; margin-top: 0;">
     <p><b>Warning:</b> <span id="errorMsg"></span></p>
   </div>
 </div>
@@ -224,7 +219,8 @@
             <option>a700</option>
           </select>
         </td>
-        <td>This is the tint for each color wich will be shown at the beginning. Material colors default tint is 500.
+        <td>This is the tint for each color wich will be shown at the beginning. Material colors default tint is
+          500.
           For
           custom palettes you can also use strings
         </td>
@@ -233,7 +229,8 @@
         <td>fixedMinHeight / fixed-min-height</td>
         <td>
           <input type="checkbox" checked class="w3-check"
-                 onclick="changeProp(this, this.checked, 'picker', 'fixedMinHeight')" style="position: inherit;">
+                 onclick="changeProp(this, this.checked, 'picker', 'fixedMinHeight')"
+                 style="position: inherit;">
         </td>
         <td>If disabled, the picker will become less high, when the current subpalette has less colors than the
           mainpalette
@@ -248,14 +245,16 @@
             <option>material-accent</option>
           </select>
         </td>
-        <td>The palette with all colors. If it is a string, the picker will use a built in palette instead of your own
+        <td>The palette with all colors. If it is a string, the picker will use a built in palette instead of
+          your own
         </td>
       </tr>
       <tr>
         <td>useSpectrumPicker / use-spectrum-picker</td>
         <td>
           <input type="checkbox" checked class="w3-check"
-                 onclick="changeProp(this, this.checked, 'picker', 'useSpectrumPicker')" style="position: inherit;">
+                 onclick="changeProp(this, this.checked, 'picker', 'useSpectrumPicker')"
+                 style="position: inherit;">
         </td>
         <td>If false, the other color tints can not be selected, so only the color wich matches default tint is
           selectable
@@ -325,7 +324,7 @@
 
   function changeProp (sourceElm, value, targetID, targetProp, min, max) {
     var tar = document.getElementById(targetID)
-    
+
     if (value < min) {
       errMsg.innerHTML = 'The value is to small. The smallest possible value is: <b>' + min + '</b>'
       error.style.display = 'block'
