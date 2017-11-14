@@ -84,6 +84,7 @@ material-accent : only the accent material colors
 <md-color-picker value="#abcdef" palette="material-accent" default-tint="300" use-spectrum-picker="false"></md-color-picker>
 ````
 **Events:**
+
 When the value of the picker changes (means the user selected a color) an event will be triggered.
 To change the selected color of the picker itself so that the new color is visually selected, you must set the value of the picker by yourself. But don't worry, it's easy and here is a working example: 
 ````javascript
