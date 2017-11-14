@@ -44,7 +44,7 @@ Then, you can use it like a html tag:
 ````html
 <md-color-picker></md-color-picker>
 ````
-A custom elements polyfill is included, so it will work in even in browsers wich do not support the custom-elements specification.
+A custom elements polyfill is included, so it will work even in browsers wich do not support the custom-elements specification.
 
 ## Api
 The picker let you pass in some options and attributes so you can customize it.
@@ -82,6 +82,18 @@ material-accent : only the accent material colors
 **Full example:**
 ````html
 <md-color-picker value="#abcdef" palette="material-accent" default-tint="300" use-spectrum-picker="false"></md-color-picker>
+````
+**Events:**
+When the value of the picker changes (means the user selected a color) an event will be triggered.
+To change the selected color of the picker itself so that the new color is visually selected, you must set the value of the picker by yourself. But don't worry, it's easy and here is a working example: 
+````javascript
+var picker = document.getElementById('picker') // get the color picker element
+function colorChanged (event) {
+    var color = event.detail[0] // get the color
+    console.log('Selected Color:' + color)
+    picker.value = color // set the value of the picker to the selected color
+}
+picker.addEventListener('change', colorChanged) // add the event to the picker element
 ````
 
 For a more detailed example, see the demo page under docs folder or live: https://bennyalex.github.io/material-design-inspired-color-picker/
