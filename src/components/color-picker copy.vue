@@ -1,6 +1,6 @@
 <template>
   <div
-    class="mdcp"
+    class="mdcp mdcp-color-wrapper"
     :style="
       fixedMinHeight
         ? { width: wrapperWidth, minHeight: wrapperMinHeight }
@@ -8,11 +8,10 @@
     "
   >
     <div
-      v-if="subPalette !== undefined"
+      v-show="subPalette !== undefined/* && !backButtonAtEnd*/"
       @click="subPalette = undefined"
       class="mdcp-back-icon"
       :style="{
-        order: backButtonAtEnd ? 2 : 1,
         margin: colorMargin + 'px',
         height: colorSizePx,
         width: colorSizePx
@@ -21,8 +20,8 @@
       <svg
         :fill="backButtonColor"
         :height="colorSize"
-        :width="colorSize / 2"
         viewBox="0 0 24 24"
+        :width="colorSize / 2"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path d="M0 0h24v24H0z" fill="none" />
@@ -37,17 +36,51 @@
       :key="color.name"
       @click.stop="click(color)"
       class="mdcp-color"
-      :class="{
-        'mdcp-selected':
-          color.value.toLowerCase() === value.toLowerCase() ||
-          isTintOfSelected(color),
-        'mdcp-is-light': colorIsLight(color.value)
-      }"
       :style="getColorStyle(color)"
       :title="color.name"
     >
-      <span :style="circleStyle" class="mdcp-circle"></span>
+      <span
+        :class="{
+          'mdcp-visible':
+            color.value.toLowerCase() === value.toLowerCase() ||
+            isTintOfSelected(color),
+          'mdcp-is-light': colorIsLight(color.value)
+        }"
+      >
+        <span
+          :style="{ width: colorSize - 8 + 'px', height: colorSize - 8 + 'px' }"
+          class="mdcp-outer-circle"
+        ></span>
+
+        <span
+          :style="{
+            width: colorSize - 22 + 'px',
+            height: colorSize - 22 + 'px'
+          }"
+          class="mdcp-inner-circle"
+        ></span>
+      </span>
     </div>
+
+    <!-- Todo: show back button at end using flexbox
+    <div
+      v-show="subPalette !== undefined && backButtonAtEnd"
+      @click="subPalette = undefined"
+      class="back-icon"
+      :style="{margin: colorMargin + 'px', height: colorSizePx, width: colorSizePx, float: 'right'}"
+    >
+      <svg
+        :fill="backButtonColor"
+        :height="colorSize"
+        viewBox="0 0 24 24"
+        :width="colorSize / 2"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M0 0h24v24H0z" fill="none"/>
+        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+      </svg>
+    </div>
+     -->
   </div>
 </template>
 
@@ -84,10 +117,11 @@ export default {
       type: [String, Object],
       required: false
     },
-    backButtonAtEnd: {
-      type: Boolean,
-      default: false
-    },
+    /* TODO
+      backButtonAtEnd: {
+        type: Boolean,
+        default: false
+      },*/
     backButtonColor: {
       type: String,
       default: "#000000"
@@ -174,15 +208,6 @@ export default {
       });
       return colors;
     },
-    circleStyle() {
-      const padding = Math.round((this.colorSize * 30) / 100);
-      const border = Math.round((this.colorSize * 8) / 100);
-
-      return {
-        padding: (padding < 1 ? 1 : padding) + "px",
-        "border-width": (border < 1 ? 1 : border) + "px"
-      };
-    },
     currentPalette() {
       if (!this.palette) return materialPalette;
       else if (typeof this.palette === "string") {
@@ -242,13 +267,21 @@ export default {
 </script>
 
 <style>
+.mdcp.mdcp-color-wrapper {
+  margin: 0;
+  padding: 0;
+}
+
 .mdcp,
 .mdcp * {
   box-sizing: content-box;
   text-align: left;
   line-height: 1;
   font-size: 0;
-  transition: all 0.225s ease-in-out;
+}
+
+.mdcp .mdcp-color,
+.mdcp .mdcp-back-icon {
   -webkit-tap-highlight-color: transparent;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -260,24 +293,16 @@ export default {
   cursor: pointer;
 }
 
-.mdcp {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  align-content: flex-start;
-}
-
 .mdcp .mdcp-color {
+  display: inline-block;
   border-radius: 100%;
   position: relative;
-  order: 1;
 }
 
 .mdcp .mdcp-back-icon {
+  display: inline-block;
   text-align: center;
+  float: left;
   border-radius: 100%;
   position: relative;
 }
@@ -286,29 +311,34 @@ export default {
   background: rgba(0, 0, 0, 0.19);
 }
 
-.mdcp .mdcp-color:hover {
-  transform: scale(1.115);
-}
-
-.mdcp .mdcp-circle {
+.mdcp .mdcp-outer-circle {
   position: absolute;
-  border-style: solid;
-  border-color: rgba(0, 0, 0, 0);
+  border: 4px solid rgba(0, 0, 0, 0);
   border-radius: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin: 0;
+  transition: all 0.45s;
 }
 
-.mdcp .mdcp-selected .mdcp-circle {
-  border-color: rgba(255, 255, 255, 1);
+.mdcp .mdcp-inner-circle {
+  position: absolute;
+  border: 4px solid rgba(0, 0, 0, 0);
+  border-radius: 100%;
+  margin: 7px;
+  transition: all 0.45s;
 }
 
-.mdcp .mdcp-selected.mdcp-is-light .mdcp-circle {
+.mdcp .mdcp-visible .mdcp-inner-circle {
+  border: 4px solid rgba(255, 255, 255, 1);
+  transition: all 1s;
+}
+
+.mdcp .mdcp-.visible .mdcp-outer-circle {
+  border: 4px solid rgba(0, 0, 0, 0.17);
+  transition: all 1s;
+}
+
+.mdcp .mdcp-.visible.mdcp-is-light .mdcp-inner-circle {
   border-color: #555555;
-}
-
-.mdcp .mdcp-circle {
-  transition: all 0.4s ease-in-out;
+  transition: all 1s;
 }
 </style>
